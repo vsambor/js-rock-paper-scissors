@@ -1,7 +1,8 @@
 import Router from './src/utils/router.js';
-import Menu from './src/components/Menu.js';
-import PlayerVsComputer from './src/components/PlayerVsComputer.js';
-import ComputerVsComputer from './src/components/ComputerVsComputer.js';
+import Menu from './src/views/Menu.js';
+import PlayerVsComputer from './src/views/PlayerVsComputer.js';
+import ComputerVsComputer from './src/views/ComputerVsComputer.js';
+import Multiplayer from './src/views/Multiplayer.js';
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '#computer-vs-computer',
     component: ComputerVsComputer
+  },
+  {
+    path: '#multiplayer',
+    component: Multiplayer
   }
 ]
 

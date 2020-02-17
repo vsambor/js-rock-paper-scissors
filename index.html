@@ -8,30 +8,17 @@
   <title>Rock-Paper-Scissors</title>
   <link rel="stylesheet" href="css/styles.css">
   <script type="module" src="./main.js"></script>
+  <script type="module" src="/src/components/Header.js"></script>
+  <script type="module" src="/src/components/Footer.js"></script>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this game.</noscript>
-  <header class="header">
-    <div class="header-container">
-      <div class="header-item header-rock">
-        <img src="images/rock.png">
-        <p>Rock</p>
-      </div>
-      <div class="header-item header-paper">
-        <img src="images/paper.png">
-        <p>Paper</p>
-      </div>
-      <div class="header-item header-scissors">
-        <img src="images/scissors.png">
-        <p>Scissors</p>
-      </div>
-    </div>
-  </header>
-  <main class="main">
+  <app-header></app-header>
+  <main class="main-content">
     <div id="router-view"></div>
   </main>
-  <footer class="footer"> 2020 © Rock Paper Scissors. All rights reserved. </footer>
+  <app-footer></app-footer>
 </body>
 
 </html>
