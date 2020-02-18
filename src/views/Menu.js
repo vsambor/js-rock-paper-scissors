@@ -1,11 +1,8 @@
-class Menu extends HTMLElement {
+import BaseElement from "../utils/BaseElement.js";
+
+export default class Menu extends BaseElement {
   constructor() {
     super();
-
-    const style = this.createStyle();
-    const template = this.createTemplate(style);
-
-    this.attachShadow({ mode: 'open' }).innerHTML = template;
   }
 
   createStyle() {
@@ -58,5 +55,3 @@ class Menu extends HTMLElement {
 }
 
 customElements.define('main-menu', Menu);
-
-export default Menu;

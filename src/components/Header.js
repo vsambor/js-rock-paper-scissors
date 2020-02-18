@@ -1,11 +1,8 @@
-class AppHeader extends HTMLElement {
+import BaseElement from "../utils/BaseElement.js";
+
+export default class AppHeader extends BaseElement {
   constructor() {
     super();
-
-    const style = this.createStyle();
-    const template = this.createTemplate(style);
-
-    this.attachShadow({ mode: 'open' }).innerHTML = template;
   }
 
   createStyle() {
@@ -72,5 +69,3 @@ class AppHeader extends HTMLElement {
 }
 
 customElements.define('app-header', AppHeader);
-
-export default AppHeader;

@@ -1,29 +1,30 @@
-class WeaponSelector extends HTMLElement {
+import BaseElement from "../utils/BaseElement.js";
+
+export default class WeaponSelector extends BaseElement {
   constructor() {
     super();
 
-    const style = this.createStyle();
-    const template = this.createTemplate(style);
-
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.innerHTML = template;
-
-    shadowRoot.querySelector('.weapon-item.weapon-rock').onclick = this.onRockClick;
-    shadowRoot.querySelector('.weapon-item.weapon-paper').onclick = this.onPaperClick;
-    shadowRoot.querySelector('.weapon-item.weapon-scissors').onclick = this.onScissorsClick;
+    this._listenToWeaponChange();
   }
 
+  _listenToWeaponChange() {
+    const weapons = this.root.querySelectorAll('.weapon-item');
 
-  onRockClick(event) {
-    alert("clicked" + event.name);
-  }
+    weapons.forEach(element => element.addEventListener('click', event => {
+      this.root.querySelector('.weapon-item.active').classList.remove('active');
 
-  onPaperClick(event) {
-    alert("clicked" + event.name);
-  }
+      const weaponClass = event.currentTarget.classList[1];
+      event.currentTarget.classList.add('active');
 
-  onScissorsClick(event) {
-    alert("clicked" + event.name);
+      // if (weaponClass === 'weapon-paper') {
+      // }
+      // else if (weaponClass === 'weapon-rock') {
+      //   console.log('rock');
+      // }
+      // else if (weaponClass === 'weapon-scissors') {
+      //   console.log('scissors');
+      // }
+    }));
   }
 
   createStyle() {
@@ -39,11 +40,6 @@ class WeaponSelector extends HTMLElement {
       font-size: 20px;
     }
     
-    .weapon-selector-container h2 {
-      margin: 0;
-      padding: 30px;
-    }
-    
     .weapons-container {
       display: flex;
       flex-direction: row;
@@ -55,19 +51,16 @@ class WeaponSelector extends HTMLElement {
     .weapon-item {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       margin: 0px 25px 0px 25px;
       cursor: pointer;
+      width: 80px;
+      height: 65px;
     }
 
     .weapon-item.active {
       background-color: #ff7b7b;
-    }
-    
-    .weapon-item p {
-      margin: 0;
-      color: yellow;
-      font-weight: bold;
-      font-size: 20px;
     }
     
     .weapon-item img {
@@ -84,15 +77,12 @@ class WeaponSelector extends HTMLElement {
       <div class="weapons-container">
         <div class="weapon-item weapon-rock active">
           <img src="images/rock.png">
-          <p>Rock</p>
         </div>
         <div class="weapon-item weapon-paper">
           <img src="images/paper.png">
-          <p>Paper</p>
         </div>
         <div class="weapon-item weapon-scissors">
           <img src="images/scissors.png">
-          <p>Scissors</p>
         </div>
       </div>
     </div>
@@ -101,5 +91,3 @@ class WeaponSelector extends HTMLElement {
 }
 
 customElements.define('weapon-selector', WeaponSelector);
-
-export default WeaponSelector;

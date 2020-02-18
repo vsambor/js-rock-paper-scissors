@@ -1,17 +1,22 @@
+import BaseElement from "../utils/BaseElement.js";
 import StartCounter from "../components/StartCounter.js";
 import HeadsUpDisplay from "../components/HeadsUpDisplay.js";
 import WeaponSelector from "../components/WeaponSelector.js";
 import ResultDisplay from "../components/ResultDisplay.js";
 
-class PlayerVsComputer extends HTMLElement {
+const START_COUNTER_TAG = '<start-counter id="counter-element"></start-counter>';
+const RESULT_DISPLAY_TAG = '<result-display></result-display>';
+
+class PlayerVsComputer extends BaseElement {
   constructor() {
     super();
-    this.mainComponent = '<start-counter></start-counter>';
+    this.mainComponent = START_COUNTER_TAG;
+    this.render();
 
-    const style = this.createStyle();
-    const template = this.createTemplate(style);
-
-    this.attachShadow({ mode: 'open' }).innerHTML = template;
+    this.root.getElementById('counter-element').addEventListener('counter-done', () => {
+      this.mainComponent = RESULT_DISPLAY_TAG;
+      this.render();
+    });
   }
 
   createStyle() {
@@ -22,14 +27,20 @@ class PlayerVsComputer extends HTMLElement {
       margin-bottom: 20px;
       height: 100%;
     }
+
+    .player-vs-computer-container h4 {
+      margin: 0;
+      padding: 10px;
+    }
     `;
   }
 
   createTemplate(style = '') {
+
     return /*html*/`
     <style>${style}</style>
     <div class="player-vs-computer-container">
-      PLAYER VS COMPUTER
+      <h4>PLAYER VS COMPUTER</h4>
 
       <heads-up-display></heads-up-display>
       ${this.mainComponent}

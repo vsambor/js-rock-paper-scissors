@@ -1,11 +1,8 @@
-class AppFooter extends HTMLElement {
+import BaseElement from "../utils/BaseElement.js";
+
+export default class AppFooter extends BaseElement {
   constructor() {
     super();
-
-    const style = this.createStyle();
-    const template = this.createTemplate(style);
-
-    this.attachShadow({ mode: 'open' }).innerHTML = template;
   }
 
   createStyle() {
@@ -28,5 +25,3 @@ class AppFooter extends HTMLElement {
 }
 
 customElements.define('app-footer', AppFooter);
-
-export default AppFooter;

@@ -1,32 +1,37 @@
-class StartCounter extends HTMLElement {
+import BaseElement from "../utils/BaseElement.js";
+
+export default class StartCounter extends BaseElement {
   constructor() {
     super();
+    this.maxCountSeconds = 3;
+    this._startCounting();
+  }
 
-    const style = this.createStyle();
-    const template = this.createTemplate(style);
-
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.innerHTML = template;
-
-    let count = 3;
+  _startCounting() {
     const timer = setInterval(() => {
-      if (count === 0) {
+      if (this.maxCountSeconds === 0) {
         clearInterval(timer);
-
-        console.log('DONE!');
-
+        this._onCounterFinished();
       } else {
-        shadowRoot.querySelector('.start-counter-container').innerHTML = count--;
+        this.root.querySelector('.start-counter-container').innerHTML = this.maxCountSeconds--;
       }
     }, 1000);
+  }
 
+  _onCounterFinished() {
+    const doneEvent = new CustomEvent('counter-done', {
+      bubbles: true,
+      composed: true
+    });
+
+    this.dispatchEvent(doneEvent);
   }
 
   createStyle() {
     return `  
     .start-counter-container {
       font-size: 140px;
-      height: 300px;
+      height: 350px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -43,5 +48,3 @@ class StartCounter extends HTMLElement {
 }
 
 customElements.define('start-counter', StartCounter);
-
-export default StartCounter;

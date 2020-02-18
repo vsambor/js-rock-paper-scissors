@@ -1,12 +1,8 @@
-class HeadsUpDisplay extends HTMLElement {
+import BaseElement from "../utils/BaseElement.js";
+
+export default class HeadsUpDisplay extends BaseElement {
   constructor() {
     super();
-
-    const style = this.createStyle();
-    const template = this.createTemplate(style);
-
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.innerHTML = template;
   }
 
   createStyle() {
@@ -37,5 +33,3 @@ class HeadsUpDisplay extends HTMLElement {
 }
 
 customElements.define('heads-up-display', HeadsUpDisplay);
-
-export default HeadsUpDisplay;
