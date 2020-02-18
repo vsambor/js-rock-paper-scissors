@@ -31,11 +31,11 @@ class Menu extends HTMLElement {
         background-color: rgb(85, 155, 216);
         color: black;
         border: none;
-        padding: 10px 28px;
+        padding: 14px 44px;
         text-align: center;
         display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
+        font-size: 20px;
+        margin: 15px 2px;
         cursor: pointer;
         text-decoration: none;
         width: 300px;

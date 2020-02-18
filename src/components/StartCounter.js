@@ -1,4 +1,3 @@
-
 class StartCounter extends HTMLElement {
   constructor() {
     super();
@@ -6,13 +5,31 @@ class StartCounter extends HTMLElement {
     const style = this.createStyle();
     const template = this.createTemplate(style);
 
-    this.attachShadow({ mode: 'open' }).innerHTML = template;
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    shadowRoot.innerHTML = template;
+
+    let count = 3;
+    const timer = setInterval(() => {
+      if (count === 0) {
+        clearInterval(timer);
+
+        console.log('DONE!');
+
+      } else {
+        shadowRoot.querySelector('.start-counter-container').innerHTML = count--;
+      }
+    }, 1000);
+
   }
 
   createStyle() {
     return `  
     .start-counter-container {
-      background-color: pink;
+      font-size: 140px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     `;
   }
@@ -20,10 +37,7 @@ class StartCounter extends HTMLElement {
   createTemplate(style = '') {
     return /*html*/`
     <style>${style}</style>
-    <div class="start-counter-container">
-      StartCounter
-      <h1> 3, 2, 1...</h1>
-    </div>
+    <div class="start-counter-container">Be Ready!</div>
     `;
   }
 }

@@ -1,4 +1,3 @@
-
 class AppHeader extends HTMLElement {
   constructor() {
     super();

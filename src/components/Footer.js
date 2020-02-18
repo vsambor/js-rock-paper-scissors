@@ -1,4 +1,3 @@
-
 class AppFooter extends HTMLElement {
   constructor() {
     super();
