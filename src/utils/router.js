@@ -5,28 +5,28 @@ export default class Router {
     this.routes = routes;
     this.routerView = document.getElementById(ROUTER_VIEW_ID);
 
-    this._renderComponentForCurrentPath();
+    this._renderViewForCurrentPath();
     this._addHashChangeListener();
   }
 
   _addHashChangeListener() {
-    window.onhashchange = () => this._renderComponentForCurrentPath();
+    window.onhashchange = () => this._renderViewForCurrentPath();
   }
 
-  _renderComponentForCurrentPath() {
+  _renderViewForCurrentPath() {
     const currentHash = window.location.hash || '/';
     const currentRoute = this.routes.find(route => route.path === currentHash);
 
     if (currentRoute) {
-      this._renderComponent(currentRoute.component);
+      this._renderView(currentRoute.view);
     } else {
       // Falls back on root.
       window.location.href = window.location.origin;
     }
   }
 
-  _renderComponent(Component) {
+  _renderView(View) {
     this.routerView.innerHTML = '';
-    this.routerView.append(new Component());
+    this.routerView.append(new View());
   }
 }

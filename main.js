@@ -7,19 +7,19 @@ import Multiplayer from './src/views/Multiplayer.js';
 const routes = [
   {
     path: '/',
-    component: Menu
+    view: Menu
   },
   {
     path: '#player-vs-computer',
-    component: PlayerVsComputer
+    view: PlayerVsComputer
   },
   {
     path: '#computer-vs-computer',
-    component: ComputerVsComputer
+    view: ComputerVsComputer
   },
   {
     path: '#multiplayer',
-    component: Multiplayer
+    view: Multiplayer
   }
 ]
 
