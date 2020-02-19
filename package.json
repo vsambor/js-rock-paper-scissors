@@ -1,0 +1,22 @@
+{
+  "name": "js-rock-paper-scissors",
+  "version": "1.0.0",
+  "description": "JavaScript Game - Rock Paper Scissors",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vsambor/js-rock-paper-scissors.git"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "Vasile Sambor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vsambor/js-rock-paper-scissors/issues"
+  },
+  "homepage": "https://github.com/vsambor/js-rock-paper-scissors#readme"
+}
