@@ -4,19 +4,33 @@ import HeadsUpDisplay from "../components/HeadsUpDisplay.js";
 import WeaponSelector from "../components/WeaponSelector.js";
 import ResultDisplay from "../components/ResultDisplay.js";
 
-const START_COUNTER_TAG = '<start-counter id="counter-element"></start-counter>';
-const RESULT_DISPLAY_TAG = '<result-display></result-display>';
-
-class PlayerVsComputer extends BaseElement {
+export default class PlayerVsComputer extends BaseElement {
   constructor() {
     super();
-    this.mainComponent = START_COUNTER_TAG;
-    this.render();
 
-    this.root.getElementById('counter-element').addEventListener('counter-done', () => {
-      this.mainComponent = RESULT_DISPLAY_TAG;
-      this.render();
-    });
+    this.hudElement = this.root.getElementById('hud');
+    this.counterElement = this.root.getElementById('start-counter');
+    this.weaponSelectorElement = this.root.getElementById('weapon-selector');
+    this.resultDisplayElement = this.root.getElementById('result-display');
+
+    this._handleCounterEvents();
+  }
+
+  _handleCounterEvents() {
+    this.counterElement.addEventListener('counter-start', this._onCounterStart.bind(this));
+    this.counterElement.addEventListener('counter-end', this._onCounterEnd.bind(this));
+  }
+
+  _onCounterStart() {
+    this.weaponSelectorElement.style.display = 'block';
+    this.hudElement.style.display = 'block';
+    this.hudElement.player1Text = 'PL1';
+    this.hudElement.player2Text = 'CMP';
+  }
+
+  _onCounterEnd() {
+    this.counterElement.style.display = 'none';
+    this.resultDisplayElement.style.display = 'block';
   }
 
   createStyle() {
@@ -32,24 +46,32 @@ class PlayerVsComputer extends BaseElement {
       margin: 0;
       padding: 10px;
     }
+
+    #hud,
+    #result-display,
+    #weapon-selector {
+      display: none;
+    }
     `;
   }
 
   createTemplate(style = '') {
-
     return /*html*/`
     <style>${style}</style>
     <div class="player-vs-computer-container">
       <h4>PLAYER VS COMPUTER</h4>
-
-      <heads-up-display></heads-up-display>
-      ${this.mainComponent}
-      <weapon-selector></weapon-selector>
+      <heads-up-display id="hud"></heads-up-display>
+      <start-counter id="start-counter"></start-counter>
+      <result-display id="result-display"></result-display>
+      <weapon-selector id="weapon-selector"></weapon-selector>
     </div>
     `;
+  }
+
+  disconnectedCallback() {
+    this.counterElement.removeEventListener('counter-start', this._onCounterStart.bind(this));
+    this.counterElement.removeEventListener('counter-end', this._onCounterEnd.bind(this));
   }
 }
 
 customElements.define('player-vs-computer', PlayerVsComputer);
-
-export default PlayerVsComputer;

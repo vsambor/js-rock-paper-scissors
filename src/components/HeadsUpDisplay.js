@@ -3,7 +3,21 @@ import BaseElement from "../utils/BaseElement.js";
 export default class HeadsUpDisplay extends BaseElement {
   constructor() {
     super();
+
+    this.player1Text = 'Player 1';
+    this.player2Text = 'Player 2';
+    this.render();
   }
+
+  // set player1Text(value) {
+  //   this.player1Text = value;
+  //   this.render();
+  // }
+
+  // set player2Text(value) {
+  //   this.player2Text = value;
+  //   this.render();
+  // }
 
   createStyle() {
     return `  
@@ -25,8 +39,8 @@ export default class HeadsUpDisplay extends BaseElement {
     <style>${style}</style>
     <div class="hud-container">
       <div>Round: <span id="round-holder">0</span></div>
-      <div>Player Score: <span id="player-score-holder">0</span></div>
-      <div>Computer Score: <span id="computer-score-holder">0</span></div>
+      <div>${this.player1Text} Score: <span id="player-score-holder">0</span></div>
+      <div>${this.player2Text} Score: <span id="computer-score-holder">0</span></div>
     </div>
     `;
   }
