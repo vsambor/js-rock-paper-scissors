@@ -1,12 +1,12 @@
-import { Weapon } from "./Weapon";
-import { PAPER_TYPE, ROCK_TYPE } from '../../utils/constants.js';
+import Weapon from "./Weapon.js";
+import Rock from "./Rock.js";
 
 export default class Paper extends Weapon {
   constructor() {
-    super(PAPER_TYPE);
+    super();
   }
 
   wins(weapon) {
-    return weapon.type === ROCK_TYPE;
+    return weapon instanceof Rock;
   }
 }

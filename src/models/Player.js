@@ -1,6 +1,6 @@
 export default class Player {
-  constructor(weapons = [], score = 0) {
-    this.weapons = weapons;
+  constructor(choice, score = 0) {
     this.score = score;
+    this.choice = choice;
   }
 }

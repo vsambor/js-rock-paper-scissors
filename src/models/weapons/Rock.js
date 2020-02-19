@@ -1,12 +1,12 @@
-import { Weapon } from "./Weapon";
-import { ROCK_TYPE, SCISSORS_TYPE } from '../../utils/constants.js';
+import Weapon from "./Weapon.js";
+import Scissors from "./Scissors.js";
 
 export default class Rock extends Weapon {
   constructor() {
-    super(ROCK_TYPE);
+    super();
   }
 
   wins(weapon) {
-    return weapon.type === SCISSORS_TYPE;
+    return weapon instanceof Scissors;
   }
 }
