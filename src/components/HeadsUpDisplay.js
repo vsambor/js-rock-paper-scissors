@@ -39,8 +39,8 @@ export default class HeadsUpDisplay extends BaseElement {
     <style>${style}</style>
     <div class="hud-container">
       <div>Round: <span id="round-holder">0</span></div>
-      <div>${this.player1Text} Score: <span id="player-score-holder">0</span></div>
-      <div>${this.player2Text} Score: <span id="computer-score-holder">0</span></div>
+      <div>Score ${this.player1Text}: <span id="player-score-holder">0</span></div>
+      <div>Score ${this.player2Text}: <span id="computer-score-holder">0</span></div>
     </div>
     `;
   }

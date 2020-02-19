@@ -3,22 +3,40 @@ import StartCounter from "../components/StartCounter.js";
 import HeadsUpDisplay from "../components/HeadsUpDisplay.js";
 import WeaponSelector from "../components/WeaponSelector.js";
 import ResultDisplay from "../components/ResultDisplay.js";
+import Game from "../models/Game.js";
+import HumanPlayer from "../models/HumanPlayer.js";
+import ComputerPlayer from "../models/ComputerPlayer.js";
+import Rock from "../models/weapons/Rock.js";
+
+const PLAYER_DEFAULT_WEAPON = new Rock();
 
 export default class PlayerVsComputer extends BaseElement {
   constructor() {
     super();
 
+    this._initPlayers();
+    this._initComponents();
+    this._initEventListeners();
+  }
+
+  _initPlayers() {
+    this.player = new HumanPlayer();
+    this.player.setChoice(PLAYER_DEFAULT_WEAPON);
+
+    this.computer = new ComputerPlayer();
+  }
+
+  _initComponents() {
     this.hudElement = this.root.getElementById('hud');
     this.counterElement = this.root.getElementById('start-counter');
     this.weaponSelectorElement = this.root.getElementById('weapon-selector');
     this.resultDisplayElement = this.root.getElementById('result-display');
-
-    this._handleCounterEvents();
   }
 
-  _handleCounterEvents() {
+  _initEventListeners() {
     this.counterElement.addEventListener('counter-start', this._onCounterStart.bind(this));
     this.counterElement.addEventListener('counter-end', this._onCounterEnd.bind(this));
+    this.weaponSelectorElement.addEventListener('weapon-selected', this._onWeaponSelected.bind(this));
   }
 
   _onCounterStart() {
@@ -31,6 +49,17 @@ export default class PlayerVsComputer extends BaseElement {
   _onCounterEnd() {
     this.counterElement.style.display = 'none';
     this.resultDisplayElement.style.display = 'block';
+
+    this._startGame();
+  }
+
+  _startGame() {
+    this.game = new Game(this.player, this.computer);
+    this.game.play();
+  }
+
+  _onWeaponSelected(event) {
+    this.player.setChoice(event.detail.weapon);
   }
 
   createStyle() {
@@ -71,6 +100,7 @@ export default class PlayerVsComputer extends BaseElement {
   disconnectedCallback() {
     this.counterElement.removeEventListener('counter-start', this._onCounterStart.bind(this));
     this.counterElement.removeEventListener('counter-end', this._onCounterEnd.bind(this));
+    this.weaponSelectorElement.removeEventListener('weapon-selected', this._onWeaponSelected.bind(this));
   }
 }
 

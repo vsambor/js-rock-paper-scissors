@@ -1,4 +1,15 @@
 import BaseElement from "../utils/BaseElement.js";
+import Rock from "../models/weapons/Rock.js";
+import Paper from "../models/weapons/Paper.js";
+import Scissors from "../models/weapons/Scissors.js";
+
+
+const WEAPONS_MAP = {
+  'weapon-rock': Rock,
+  'weapon-paper': Paper,
+  'weapon-scissors': Scissors,
+}
+
 
 export default class WeaponSelector extends BaseElement {
   constructor() {
@@ -10,21 +21,31 @@ export default class WeaponSelector extends BaseElement {
   _listenToWeaponChange() {
     const weapons = this.root.querySelectorAll('.weapon-item');
 
-    weapons.forEach(element => element.addEventListener('click', event => {
-      this.root.querySelector('.weapon-item.active').classList.remove('active');
+    weapons.forEach(element => element.addEventListener('click', this._handleWeaponChange.bind(this)));
+  }
 
-      const weaponClass = event.currentTarget.classList[1];
-      event.currentTarget.classList.add('active');
+  _handleWeaponChange(event) {
+    this._updateActiveClass(event.currentTarget);
 
-      // if (weaponClass === 'weapon-paper') {
-      // }
-      // else if (weaponClass === 'weapon-rock') {
-      //   console.log('rock');
-      // }
-      // else if (weaponClass === 'weapon-scissors') {
-      //   console.log('scissors');
-      // }
-    }));
+    const weaponClass = event.currentTarget.classList[1];
+    this._triggerWeaponSelected(new WEAPONS_MAP[weaponClass]());
+  }
+
+  _updateActiveClass(target) {
+    this.root.querySelector('.weapon-item.active').classList.remove('active');
+    target.classList.add('active');
+  }
+
+  _triggerWeaponSelected(weapon) {
+    const weaponSelectedEvent = new CustomEvent('weapon-selected', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        weapon: weapon
+      }
+    });
+
+    this.dispatchEvent(weaponSelectedEvent);
   }
 
   createStyle() {
