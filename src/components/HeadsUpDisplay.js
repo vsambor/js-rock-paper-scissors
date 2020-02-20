@@ -4,20 +4,30 @@ export default class HeadsUpDisplay extends BaseElement {
   constructor() {
     super();
 
-    this.player1Text = 'Player 1';
-    this.player2Text = 'Player 2';
+    this.player1Text = 'P1';
+    this.player2Text = 'P2';
     this.render();
   }
 
-  // set player1Text(value) {
-  //   this.player1Text = value;
-  //   this.render();
-  // }
+  static get observedAttributes() {
+    return ['player1Text', 'player2Text'];
+  }
 
-  // set player2Text(value) {
-  //   this.player2Text = value;
-  //   this.render();
-  // }
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log('changed: ', name, oldValue, newValue);
+  }
+
+  set player1Text(value) {
+    //this.player1Text = value;
+    this.setAttribute('player1Text', value);
+    this.render();
+  }
+
+  set player2Text(value) {
+    // this.player2Text = value;
+    this.setAttribute('player2Text', value);
+    this.render();
+  }
 
   createStyle() {
     return `  

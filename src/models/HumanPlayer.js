@@ -1,8 +1,8 @@
 import Player from "../models/Player.js";
 
 export default class HumanPlayer extends Player {
-  constructor(choice, score) {
-    super(choice, score);
+  constructor() {
+    super();
   }
 
   choose(weapons) {
@@ -11,9 +11,5 @@ export default class HumanPlayer extends Player {
 
   setChoice(weapon) {
     this.choice = weapon;
-  }
-
-  setScore(score) {
-    this.score = score;
   }
 }

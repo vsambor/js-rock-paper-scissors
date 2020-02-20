@@ -1,8 +1,8 @@
 import Player from "../models/Player.js";
 
 export default class ComputerPlayer extends Player {
-  constructor(choice, score) {
-    super(choice, score);
+  constructor() {
+    super();
   }
 
   choose(weapons) {
@@ -10,9 +10,5 @@ export default class ComputerPlayer extends Player {
     this.choice = weapons[randomIndex];
 
     return this.choice;
-  }
-
-  setScore(score) {
-    this.score = score;
   }
 }
