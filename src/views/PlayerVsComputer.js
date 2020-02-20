@@ -15,6 +15,7 @@ export default class PlayerVsComputer extends BaseElement {
     super();
 
     this._initPlayers();
+    this._initGame();
     this._initComponents();
     this._initEventListeners();
   }
@@ -24,6 +25,10 @@ export default class PlayerVsComputer extends BaseElement {
     this.player.setChoice(PLAYER_DEFAULT_WEAPON);
 
     this.computer = new ComputerPlayer();
+  }
+
+  _initGame() {
+    this.game = new Game(this.player, this.computer);
   }
 
   _initComponents() {
@@ -37,6 +42,8 @@ export default class PlayerVsComputer extends BaseElement {
     this.counterElement.addEventListener('counter-start', this._onCounterStart.bind(this));
     this.counterElement.addEventListener('counter-end', this._onCounterEnd.bind(this));
     this.weaponSelectorElement.addEventListener('weapon-selected', this._onWeaponSelected.bind(this));
+    this.resultDisplayElement.addEventListener('replay', this._onReplay.bind(this));
+    this.resultDisplayElement.addEventListener('reset', this._onReset.bind(this));
   }
 
   _onCounterStart() {
@@ -54,12 +61,27 @@ export default class PlayerVsComputer extends BaseElement {
   }
 
   _startGame() {
-    this.game = new Game(this.player, this.computer);
     this.game.play();
+
+    console.log("Round: ", this.game.numberRounds);
+
+    console.log("P1 score: ", this.player.score);
+    console.log("P1 choice: ", this.player.choice);
+
+    console.log("P2 score: ", this.computer.score);
+    console.log("P2 choice: ", this.computer.choice);
   }
 
   _onWeaponSelected(event) {
     this.player.setChoice(event.detail.weapon);
+  }
+
+  _onReplay(event) {
+    console.log('replay clicked!')
+  }
+
+  _onReset(event) {
+    console.log('reset clicked!');
   }
 
   createStyle() {

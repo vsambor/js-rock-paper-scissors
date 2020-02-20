@@ -1,6 +1,10 @@
 import RockWeapon from "./weapons/Rock.js";
 import PaperWeapon from "./weapons/Paper.js";
 import ScissorsWeapon from "./weapons/Scissors.js";
+import {
+  PLAYER_2_WON_RESULT,
+  PLAYER_1_WON_RESULT
+} from "../utils/constants.js";
 
 
 export default class Game {
@@ -13,17 +17,35 @@ export default class Game {
       new PaperWeapon(),
       new ScissorsWeapon()
     ]
+
+    this.numberRounds = 0;
   }
 
   play() {
-    const player1Choise = this.player1.choose(this.weapons);
-    const player2Choise = this.player2.choose(this.weapons);
+    this.numberRounds++;
 
-    console.log('player1Choise', player1Choise);
-    console.log('player2Choise', player2Choise);
+    const player1SelectedWeapon = this.player1.choose(this.weapons);
+    const player2SelectedWeapon = this.player2.choose(this.weapons);
+    const roundResult = player1SelectedWeapon.fightWith(player2SelectedWeapon);
 
-    const gameResult = player1Choise.wins(player2Choise);
+    this._interpretResult(roundResult);
+  }
 
-    console.log('Game Result: ', gameResult);
+  _interpretResult(result) {
+    if (result === PLAYER_1_WON_RESULT) {
+      this.player1.won();
+    }
+    else if (result === PLAYER_2_WON_RESULT) {
+      this.player2.won();
+    }
+    else {
+      // DRAW
+    }
+  }
+
+  reset() {
+    this.numberRounds = 0;
+    this.player1.reset();
+    this.player2.reset();
   }
 }

@@ -1,12 +1,22 @@
 import Weapon from "./Weapon.js";
-import Paper from "./Paper.js";
+import {
+  PLAYER_1_WON_RESULT,
+  PLAYER_2_WON_RESULT,
+  DRAW_RESULT
+} from "../../utils/constants.js";
 
 export default class Scissors extends Weapon {
   constructor() {
     super();
+
+    this.fightResultMap = {
+      Scissors: DRAW_RESULT,
+      Paper: PLAYER_1_WON_RESULT,
+      Rock: PLAYER_2_WON_RESULT
+    }
   }
 
-  wins(weapon) {
-    return weapon instanceof Paper;
+  fightWith(weapon) {
+    return this.fightResultMap[weapon.constructor.name];
   }
 }
