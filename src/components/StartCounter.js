@@ -1,15 +1,30 @@
 import BaseElement from "../utils/BaseElement.js";
 
+const MAX_COUNTER_SECONDS = 3;
 export default class StartCounter extends BaseElement {
   constructor() {
     super();
-    this.maxCountSeconds = 3;
 
-    this.root.getElementById('start-counter-button')
-      .addEventListener('click', this._startCounting.bind(this));
+    this.maxCountSeconds = MAX_COUNTER_SECONDS;
+
+    this._initElements();
+    this._initEventListeners();
+  }
+
+  _initElements() {
+    this.buttonStart = this.root.getElementById('start-counter-button');
+    this.numberHolder = this.root.getElementById('start-counter-number');
+  }
+
+  _initEventListeners() {
+    this.root.getElementById('start-counter-button').addEventListener('click', this._startCounting.bind(this));
   }
 
   _startCounting() {
+    this.buttonStart.style.display = 'none';
+    this.numberHolder.style.display = 'block';
+    this.numberHolder.innerHTML = this.maxCountSeconds;
+
     this._onStartCounting();
 
     const timer = setInterval(() => {
@@ -17,7 +32,7 @@ export default class StartCounter extends BaseElement {
         clearInterval(timer);
         this._onFinishCounting();
       } else {
-        this.root.querySelector('.start-counter-container').innerHTML = this.maxCountSeconds--;
+        this.numberHolder.innerHTML = this.maxCountSeconds--;
       }
     }, 1000);
   }
@@ -32,14 +47,23 @@ export default class StartCounter extends BaseElement {
     this.dispatchEvent(endEvent);
   }
 
+  reset() {
+    this.maxCountSeconds = MAX_COUNTER_SECONDS;
+    this.numberHolder.style.display = 'none';
+    this.buttonStart.style.display = 'block';
+  }
+
   createStyle() {
     return `  
     .start-counter-container {
-      font-size: 140px;
       height: 350px;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    #start-counter-number {
+      font-size: 140px;
     }
 
     #start-counter-button {
@@ -55,6 +79,7 @@ export default class StartCounter extends BaseElement {
     return /*html*/`
     <style>${style}</style>
     <div class="start-counter-container">
+      <div id="start-counter-number"></div>
       <div id="start-counter-button">Click here when you are ready to play...</div>
     </div>
     `;

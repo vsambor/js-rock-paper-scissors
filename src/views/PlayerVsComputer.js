@@ -7,6 +7,10 @@ import Game from "../models/Game.js";
 import HumanPlayer from "../models/HumanPlayer.js";
 import ComputerPlayer from "../models/ComputerPlayer.js";
 import Rock from "../models/weapons/Rock.js";
+import {
+  PLAYER_1_WON_RESULT,
+  PLAYER_2_WON_RESULT
+} from "../utils/constants.js";
 
 const PLAYER_DEFAULT_WEAPON = new Rock();
 
@@ -16,7 +20,7 @@ export default class PlayerVsComputer extends BaseElement {
 
     this._initPlayers();
     this._initGame();
-    this._initComponents();
+    this._initElements();
     this._initEventListeners();
   }
 
@@ -31,16 +35,16 @@ export default class PlayerVsComputer extends BaseElement {
     this.game = new Game(this.player, this.computer);
   }
 
-  _initComponents() {
+  _initElements() {
     this.hudElement = this.root.getElementById('hud');
-    this.counterElement = this.root.getElementById('start-counter');
+    this.startCounterElement = this.root.getElementById('start-counter');
     this.weaponSelectorElement = this.root.getElementById('weapon-selector');
     this.resultDisplayElement = this.root.getElementById('result-display');
   }
 
   _initEventListeners() {
-    this.counterElement.addEventListener('counter-start', this._onCounterStart.bind(this));
-    this.counterElement.addEventListener('counter-end', this._onCounterEnd.bind(this));
+    this.startCounterElement.addEventListener('counter-start', this._onCounterStart.bind(this));
+    this.startCounterElement.addEventListener('counter-end', this._onCounterEnd.bind(this));
     this.weaponSelectorElement.addEventListener('weapon-selected', this._onWeaponSelected.bind(this));
     this.resultDisplayElement.addEventListener('replay', this._onReplay.bind(this));
     this.resultDisplayElement.addEventListener('reset', this._onReset.bind(this));
@@ -49,19 +53,25 @@ export default class PlayerVsComputer extends BaseElement {
   _onCounterStart() {
     this.weaponSelectorElement.style.display = 'block';
     this.hudElement.style.display = 'block';
-    this.hudElement.player1Text = 'PL1';
-    this.hudElement.player2Text = 'CMP';
+    this.hudElement.setPlayer1Text('Player');
+    this.hudElement.setPlayer2Text('Computer');
+    this.hudElement.setRoundNumber(this.game.numberRounds + 1);
   }
 
   _onCounterEnd() {
-    this.counterElement.style.display = 'none';
+    this.startCounterElement.style.display = 'none';
     this.resultDisplayElement.style.display = 'block';
 
     this._startGame();
   }
 
   _startGame() {
-    this.game.play();
+    const roundResult = this.game.play();
+
+    this.hudElement.setPlayer1Score(this.player.score);
+    this.hudElement.setPlayer2Score(this.computer.score);
+
+    this.resultDisplayElement.setResultText(roundResult);
 
     console.log("Round: ", this.game.numberRounds);
 
@@ -77,11 +87,21 @@ export default class PlayerVsComputer extends BaseElement {
   }
 
   _onReplay(event) {
-    console.log('replay clicked!')
+    console.log('replay clicked!');
+    this.startCounterElement.reset();
+    this.resultDisplayElement.style.display = 'none';
+    this.weaponSelectorElement.style.display = 'none';
+    this.startCounterElement.style.display = 'block';
   }
 
   _onReset(event) {
     console.log('reset clicked!');
+    this.startCounterElement.reset();
+    this.hudElement.reset();
+    this.game.reset();
+    this.resultDisplayElement.style.display = 'none';
+    this.weaponSelectorElement.style.display = 'none';
+    this.startCounterElement.style.display = 'block';
   }
 
   createStyle() {
@@ -120,9 +140,11 @@ export default class PlayerVsComputer extends BaseElement {
   }
 
   disconnectedCallback() {
-    this.counterElement.removeEventListener('counter-start', this._onCounterStart.bind(this));
-    this.counterElement.removeEventListener('counter-end', this._onCounterEnd.bind(this));
+    this.startCounterElement.removeEventListener('counter-start', this._onCounterStart.bind(this));
+    this.startCounterElement.removeEventListener('counter-end', this._onCounterEnd.bind(this));
     this.weaponSelectorElement.removeEventListener('weapon-selected', this._onWeaponSelected.bind(this));
+    this.resultDisplayElement.removeEventListener('replay', this._onReplay.bind(this));
+    this.resultDisplayElement.removeEventListener('reset', this._onReset.bind(this));
   }
 }
 

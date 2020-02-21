@@ -4,28 +4,43 @@ export default class HeadsUpDisplay extends BaseElement {
   constructor() {
     super();
 
-    this.player1Text = 'P1';
-    this.player2Text = 'P2';
+    this.player1Text = 'Player1';
+    this.player2Text = 'Player2';
+    this.player1Score = 0;
+    this.player2Score = 0;
+    this.roundNumber = 0;
     this.render();
   }
 
-  static get observedAttributes() {
-    return ['player1Text', 'player2Text'];
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    console.log('changed: ', name, oldValue, newValue);
-  }
-
-  set player1Text(value) {
-    //this.player1Text = value;
-    this.setAttribute('player1Text', value);
+  setPlayer1Text(value) {
+    this.player1Text = value;
     this.render();
   }
 
-  set player2Text(value) {
-    // this.player2Text = value;
-    this.setAttribute('player2Text', value);
+  setPlayer2Text(value) {
+    this.player2Text = value;
+    this.render();
+  }
+
+  setRoundNumber(value) {
+    this.roundNumber = value;
+    this.render();
+  }
+
+  setPlayer1Score(value) {
+    this.player1Score = value;
+    this.render();
+  }
+
+  setPlayer2Score(value) {
+    this.player2Score = value;
+    this.render();
+  }
+
+  reset() {
+    this.player1Score = 0;
+    this.player2Score = 0;
+    this.roundNumber = 0;
     this.render();
   }
 
@@ -48,9 +63,9 @@ export default class HeadsUpDisplay extends BaseElement {
     return /*html*/`
     <style>${style}</style>
     <div class="hud-container">
-      <div>Round: <span id="round-holder">0</span></div>
-      <div>Score ${this.player1Text}: <span id="player-score-holder">0</span></div>
-      <div>Score ${this.player2Text}: <span id="computer-score-holder">0</span></div>
+      <div>Round: <span id="round-holder">${this.roundNumber}</span></div>
+      <div>Score ${this.player1Text}: <span id="player-score-holder">${this.player1Score}</span></div>
+      <div>Score ${this.player2Text}: <span id="computer-score-holder">${this.player2Score}</span></div>
     </div>
     `;
   }

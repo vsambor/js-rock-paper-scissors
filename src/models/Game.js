@@ -2,8 +2,8 @@ import RockWeapon from "./weapons/Rock.js";
 import PaperWeapon from "./weapons/Paper.js";
 import ScissorsWeapon from "./weapons/Scissors.js";
 import {
-  PLAYER_2_WON_RESULT,
-  PLAYER_1_WON_RESULT
+  PLAYER_1_WON_RESULT,
+  PLAYER_2_WON_RESULT
 } from "../utils/constants.js";
 
 
@@ -29,6 +29,8 @@ export default class Game {
     const roundResult = player1SelectedWeapon.fightWith(player2SelectedWeapon);
 
     this._interpretResult(roundResult);
+
+    return roundResult;
   }
 
   _interpretResult(result) {
