@@ -21,8 +21,8 @@ export default class ResultDisplay extends BaseElement {
   }
 
   _initElements() {
-    this.replayButton = this.root.getElementById('replay-btn');
-    this.resetButton = this.root.getElementById('reset-btn');
+    this.replayButton = this.root.getElementById('replay-button');
+    this.resetButton = this.root.getElementById('reset-button');
     this.resultText = this.root.getElementById('result-text');
   }
 
@@ -32,13 +32,11 @@ export default class ResultDisplay extends BaseElement {
   }
 
   _onReplayClick() {
-    const replayEvent = new CustomEvent('replay', { bubbles: true, composed: true });
-    this.dispatchEvent(replayEvent);
+    this.triggerEvent('replay');
   }
 
   _onResetClick() {
-    const resetEvent = new CustomEvent('reset', { bubbles: true, composed: true });
-    this.dispatchEvent(resetEvent);
+    this.triggerEvent('reset');
   }
 
   _getImageChoice(choice) {
@@ -92,7 +90,7 @@ export default class ResultDisplay extends BaseElement {
       #choices-result-container {
         display: flex;
         flex-direction: row;
-        width: 500px;
+        width: 450px;
         height: 110px;
         justify-content: space-between;
         align-items: center;
@@ -133,8 +131,8 @@ export default class ResultDisplay extends BaseElement {
         ${this._getPlayerChoiceElements()}
       </div>
       <div id="buttons-container">
-        <button id="replay-btn">${i18n.replay_button}</button>
-        <button id="reset-btn">${i18n.reset_button}</button>
+        <button id="replay-button">${i18n.replay_button}</button>
+        <button id="reset-button">${i18n.reset_button}</button>
       </div>
     </div>
     `;

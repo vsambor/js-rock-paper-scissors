@@ -39,13 +39,11 @@ export default class StartCounter extends BaseElement {
   }
 
   _onStartCounting() {
-    const startEvent = new CustomEvent('counter-start', { bubbles: true, composed: true });
-    this.dispatchEvent(startEvent);
+    this.triggerEvent('counter-start');
   }
 
   _onFinishCounting() {
-    const endEvent = new CustomEvent('counter-end', { bubbles: true, composed: true });
-    this.dispatchEvent(endEvent);
+    this.triggerEvent('counter-end');
   }
 
   reset() {

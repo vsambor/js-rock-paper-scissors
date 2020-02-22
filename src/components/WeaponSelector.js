@@ -15,7 +15,12 @@ export default class WeaponSelector extends BaseElement {
   constructor() {
     super();
 
+    this._initElements();
     this._listenToWeaponChange();
+  }
+
+  _initElements() {
+    this._weaponSelectorContainer = this.root.querySelector('.weapon-selector-container');
   }
 
   _listenToWeaponChange() {
@@ -26,9 +31,7 @@ export default class WeaponSelector extends BaseElement {
 
   _handleWeaponChange(event) {
     this._updateActiveClass(event.currentTarget);
-
-    const weaponClass = event.currentTarget.classList[1];
-    this._triggerWeaponSelected(new WEAPONS_MAP[weaponClass]());
+    this.triggerEvent('weapon-selected', { weapon: this._getWeaponFromTarget(event.currentTarget) });
   }
 
   _updateActiveClass(target) {
@@ -36,24 +39,19 @@ export default class WeaponSelector extends BaseElement {
     target.classList.add('active');
   }
 
-  _triggerWeaponSelected(weapon) {
-    const weaponSelectedEvent = new CustomEvent('weapon-selected', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        weapon: weapon
-      }
-    });
+  _getWeaponFromTarget(target) {
+    const weaponClass = target.classList[1];
+    const weapon = new WEAPONS_MAP[weaponClass]();
 
-    this.dispatchEvent(weaponSelectedEvent);
+    return weapon;
   }
 
   enableElement() {
-    this.root.querySelector('.weapon-selector-container').classList.remove('element-disabled');
+    this._weaponSelectorContainer.classList.remove('element-disabled');
   }
 
   disableElement() {
-    this.root.querySelector('.weapon-selector-container').classList.add('element-disabled');
+    this._weaponSelectorContainer.classList.add('element-disabled');
   }
 
   createStyle() {
