@@ -53,3 +53,6 @@ Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 **Player vs Computer**
 <img width="1424" alt="Screen Shot 2020-02-22 at 3 15 05 PM" src="https://user-images.githubusercontent.com/26199384/75093909-7a0ef280-5586-11ea-86d7-aa31628238dd.png">
 
+**Computer vs Computer**
+<img width="1425" alt="Screen Shot 2020-02-22 at 9 01 28 PM" src="https://user-images.githubusercontent.com/26199384/75098444-a80c2b00-55b6-11ea-8d5b-83448fd5caf8.png">
+
