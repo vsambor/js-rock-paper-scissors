@@ -17,7 +17,7 @@ export default class StartCounter extends BaseElement {
   }
 
   _initEventListeners() {
-    this.root.getElementById('start-counter-button').addEventListener('click', this._startCounting.bind(this));
+    this.buttonStart.addEventListener('click', this._startCounting.bind(this));
   }
 
   _startCounting() {
@@ -54,30 +54,32 @@ export default class StartCounter extends BaseElement {
   }
 
   createStyle() {
-    return `  
-    .start-counter-container {
-      height: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    return /*html*/`
+    <style>  
+      .start-counter-container {
+        height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    #start-counter-number {
-      font-size: 140px;
-    }
+      #start-counter-number {
+        font-size: 140px;
+      }
 
-    #start-counter-button {
-      font-size: 33px;
-      background-color: #77ff77;
-      padding: 10px;
-      cursor: pointer;
-    }
+      #start-counter-button {
+        font-size: 33px;
+        background-color: #77ff77;
+        padding: 10px;
+        cursor: pointer;
+      }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="start-counter-container">
       <div id="start-counter-number"></div>
       <div id="start-counter-button">Click here when you are ready to play...</div>

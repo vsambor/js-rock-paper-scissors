@@ -49,51 +49,53 @@ export default class WeaponSelector extends BaseElement {
   }
 
   createStyle() {
-    return `  
-    .weapon-selector-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      background-color: #332345;
-      width: 100%;
-      height: 150px;
-      font-size: 20px;
-    }
-    
-    .weapons-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      padding-top: 15px;
-      padding-bottom: 15px;
-    }
-    
-    .weapon-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0px 25px 0px 25px;
-      cursor: pointer;
-      width: 80px;
-      height: 65px;
-    }
+    return /*html*/`
+    <style>
+      .weapon-selector-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: #332345;
+        width: 100%;
+        height: 150px;
+        font-size: 20px;
+      }
+      
+      .weapons-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+      
+      .weapon-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0px 25px 0px 25px;
+        cursor: pointer;
+        width: 80px;
+        height: 65px;
+      }
 
-    .weapon-item.active {
-      background-color: #ff7b7b;
-    }
-    
-    .weapon-item img {
-      width: 50px;
-      height: 50px;
-    }
+      .weapon-item.active {
+        background-color: #ff7b7b;
+      }
+      
+      .weapon-item img {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="weapon-selector-container">
       <div class="weapons-container">
         <div class="weapon-item weapon-rock active">

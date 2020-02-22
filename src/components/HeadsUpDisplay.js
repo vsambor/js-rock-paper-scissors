@@ -12,31 +12,6 @@ export default class HeadsUpDisplay extends BaseElement {
     this.render();
   }
 
-  setPlayer1Text(value) {
-    this.player1Text = value;
-    this.render();
-  }
-
-  setPlayer2Text(value) {
-    this.player2Text = value;
-    this.render();
-  }
-
-  setRoundNumber(value) {
-    this.roundNumber = value;
-    this.render();
-  }
-
-  setPlayer1Score(value) {
-    this.player1Score = value;
-    this.render();
-  }
-
-  setPlayer2Score(value) {
-    this.player2Score = value;
-    this.render();
-  }
-
   reset() {
     this.player1Score = 0;
     this.player2Score = 0;
@@ -45,23 +20,25 @@ export default class HeadsUpDisplay extends BaseElement {
   }
 
   createStyle() {
-    return `  
-    .hud-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      align-items: center;
-      background-color: #779cbb;
-      width: 100%;
-      height: 50px;
-      font-size: 20px;
-    }
+    return /*html*/`
+    <style>  
+      .hud-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: #779cbb;
+        width: 100%;
+        height: 50px;
+        font-size: 20px;
+      }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="hud-container">
       <div>Round: <span id="round-holder">${this.roundNumber}</span></div>
       <div>Score ${this.player1Text}: <span id="player-score-holder">${this.player1Score}</span></div>

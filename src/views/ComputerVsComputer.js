@@ -6,17 +6,19 @@ export default class ComputerVsComputer extends BaseElement {
   }
 
   createStyle() {
-    return `
+    return /*html*/`
+    <style>
     .player-vs-computer-container {
       background-color: green;
       height: 100%;
     }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="player-vs-computer-container">COMPUTER VS COMPUTER</div>
     `;
   }

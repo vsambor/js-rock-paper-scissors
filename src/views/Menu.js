@@ -6,7 +6,8 @@ export default class Menu extends BaseElement {
   }
 
   createStyle() {
-    return `
+    return /*html*/`
+    <style>
       .main-menu {
         align-items: center;
         height: 100%;
@@ -37,12 +38,13 @@ export default class Menu extends BaseElement {
         text-decoration: none;
         width: 300px;
       }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="main-menu">
       <form class="main-form">
         <a class="button" href="/#player-vs-computer">Player vs Computer</a>

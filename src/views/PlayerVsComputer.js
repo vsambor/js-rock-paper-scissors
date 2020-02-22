@@ -53,9 +53,9 @@ export default class PlayerVsComputer extends BaseElement {
   _onCounterStart() {
     this.weaponSelectorElement.style.display = 'block';
     this.hudElement.style.display = 'block';
-    this.hudElement.setPlayer1Text('Player');
-    this.hudElement.setPlayer2Text('Computer');
-    this.hudElement.setRoundNumber(this.game.numberRounds + 1);
+    this.hudElement.setProperty('player1Text', 'Player');
+    this.hudElement.setProperty('player2Text', 'Computer');
+    this.hudElement.setProperty('roundNumber', this.game.numberRounds + 1);
   }
 
   _onCounterEnd() {
@@ -68,18 +68,11 @@ export default class PlayerVsComputer extends BaseElement {
   _startGame() {
     const roundResult = this.game.play();
 
-    this.hudElement.setPlayer1Score(this.player.score);
-    this.hudElement.setPlayer2Score(this.computer.score);
-
-    this.resultDisplayElement.setResultText(roundResult);
-
-    console.log("Round: ", this.game.numberRounds);
-
-    console.log("P1 score: ", this.player.score);
-    console.log("P1 choice: ", this.player.choice);
-
-    console.log("P2 score: ", this.computer.score);
-    console.log("P2 choice: ", this.computer.choice);
+    this.hudElement.setProperty('player1Score', this.player.score);
+    this.hudElement.setProperty('player2Score', this.computer.score);
+    this.resultDisplayElement.setProperty('resultText', roundResult);
+    this.resultDisplayElement.setProperty('player1Choice', this.player.choice.constructor.name.toLowerCase());
+    this.resultDisplayElement.setProperty('player2Choice', this.computer.choice.constructor.name.toLowerCase());
   }
 
   _onWeaponSelected(event) {
@@ -105,30 +98,32 @@ export default class PlayerVsComputer extends BaseElement {
   }
 
   createStyle() {
-    return `
-    .player-vs-computer-container {
-      background-color: #ffaebd;
-      text-align: center;
-      margin-bottom: 20px;
-      height: 100%;
-    }
+    return /*html*/`
+    <style>
+      .player-vs-computer-container {
+        background-color: #ffaebd;
+        text-align: center;
+        margin-bottom: 20px;
+        height: 100%;
+      }
 
-    .player-vs-computer-container h4 {
-      margin: 0;
-      padding: 10px;
-    }
+      .player-vs-computer-container h4 {
+        margin: 0;
+        padding: 10px;
+      }
 
-    #hud,
-    #result-display,
-    #weapon-selector {
-      display: none;
-    }
+      #hud,
+      #result-display,
+      #weapon-selector {
+        display: none;
+      }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="player-vs-computer-container">
       <h4>PLAYER VS COMPUTER</h4>
       <heads-up-display id="hud"></heads-up-display>

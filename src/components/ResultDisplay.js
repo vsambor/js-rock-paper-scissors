@@ -4,8 +4,15 @@ export default class ResultDisplay extends BaseElement {
   constructor() {
     super();
 
+    this._initProperties();
     this._initElements();
     this._initEventListeners();
+  }
+
+  _initProperties() {
+    this.resultText = '';
+    this.player1Choice = null;
+    this.player2Choice = null;
   }
 
   _initElements() {
@@ -29,44 +36,81 @@ export default class ResultDisplay extends BaseElement {
     this.dispatchEvent(resetEvent);
   }
 
-  setResultText(value) {
-    this.resultText = value;
-    this.render();
+  _getImageChoice(choice) {
+    return {
+      'rock': 'images/rock.png',
+      'paper': 'images/paper.png',
+      'scissors': 'images/scissors.png'
+    }[choice];
   }
 
   createStyle() {
-    return `  
-    .result-display-container {
-      font-size: 20px;
-      height: 350px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+    return /*html*/`  
+    <style>
+      .result-display-container {
+        font-size: 20px;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
-    #result-text {
-      margin-bottom: 30px;
-    }
+      .result-display-container img {
+        width: 50px;
+        height: 50px;
+      }
 
-    button {
-      width: 200px;
-      height: 40px;
-      margin-bottom: 20px;
-      cursor:pointer;
-    }
+      #choices-result-container {
+        display: flex;
+        flex-direction: row;
+        width: 500px;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      #buttons-container {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      button {
+        width: 200px;
+        height: 40px;
+        margin-bottom: 10px;
+        cursor:pointer;
+        background-color: #779cbb;
+        font-size: 18px;
+      }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="result-display-container">
-      <div id="result-text">${this.resultText}</div>
-      <button id="replay-btn">Replay</button>
-      <button id="reset-btn">Reset</button>
+      <div id="choices-result-container">
+        <div id="player1-choice"><img src="${this._getImageChoice(this.player1Choice)}"></div>
+        <div id="result-text">${this.resultText}</div>
+        <div id="player2-choice"><img src="${this._getImageChoice(this.player2Choice)}"></div>
+      </div>
+      <div id="buttons-container">
+        <button id="replay-btn">Replay</button>
+        <button id="reset-btn">Reset</button>
+      </div>
     </div>
     `;
+  }
+
+  connectedCallback() {
+    this._initEventListeners();
+  }
+
+  disconnectedCallback() {
+    this.replayButton.removeEventListener('click', this._onReplayClick.bind(this));
+    this.resetButton.removeEventListener('click', this._onResetClick.bind(this));
   }
 }
 

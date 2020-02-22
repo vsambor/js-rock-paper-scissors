@@ -6,17 +6,19 @@ export default class Multiplayer extends BaseElement {
   }
 
   createStyle() {
-    return `  
+    return /*html*/`  
+    <style>
     .multiplayer-container {
       background-color: GREY;
       height: 100%;
     }
+    </style>
     `;
   }
 
   createTemplate(style = '') {
     return /*html*/`
-    <style>${style}</style>
+    ${style}
     <div class="multiplayer-container">MULTIPLAYER</div>
     `;
   }

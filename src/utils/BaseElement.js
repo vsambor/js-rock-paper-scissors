@@ -7,6 +7,11 @@ export default class BaseElement extends HTMLElement {
     this.render();
   }
 
+  setProperty(name, value) {
+    this[name] = value;
+    this.render();
+  }
+
   render() {
     this.root.innerHTML = this.createTemplate(this.elStyle);
   }
