@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/vsambor/js-rock-paper-scissors#readme",
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
     "jest": "^25.1.0",
     "lite-server": "^2.5.4"
   }
