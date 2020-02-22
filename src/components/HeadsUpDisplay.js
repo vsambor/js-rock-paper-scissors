@@ -1,11 +1,12 @@
 import BaseElement from "../utils/BaseElement.js";
+import i18n from "../../i18n/index.js";
 
 export default class HeadsUpDisplay extends BaseElement {
   constructor() {
     super();
 
-    this.player1Text = 'Player1';
-    this.player2Text = 'Player2';
+    this.player1Text = i18n.player1_text;
+    this.player2Text = i18n.player2_text;
     this.player1Score = 0;
     this.player2Score = 0;
     this.roundNumber = 0;
@@ -40,9 +41,9 @@ export default class HeadsUpDisplay extends BaseElement {
     return /*html*/`
     ${style}
     <div class="hud-container">
-      <div>Round: <span id="round-holder">${this.roundNumber}</span></div>
-      <div>Score ${this.player1Text}: <span id="player-score-holder">${this.player1Score}</span></div>
-      <div>Score ${this.player2Text}: <span id="computer-score-holder">${this.player2Score}</span></div>
+      <div>${i18n.round_title}: <span id="round-holder">${this.roundNumber}</span></div>
+      <div>${i18n.score_title} ${this.player1Text}: <span id="player-score-holder">${this.player1Score}</span></div>
+      <div>${i18n.score_title} ${this.player2Text}: <span id="computer-score-holder">${this.player2Score}</span></div>
     </div>
     `;
   }

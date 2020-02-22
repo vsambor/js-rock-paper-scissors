@@ -1,4 +1,5 @@
 import BaseElement from "../utils/BaseElement.js";
+import i18n from "../../i18n/index.js";
 
 const MAX_COUNTER_SECONDS = 3;
 export default class StartCounter extends BaseElement {
@@ -82,7 +83,7 @@ export default class StartCounter extends BaseElement {
     ${style}
     <div class="start-counter-container">
       <div id="start-counter-number"></div>
-      <div id="start-counter-button">Click here when you are ready to play...</div>
+      <div id="start-counter-button">${i18n.start_counter_button}</div>
     </div>
     `;
   }

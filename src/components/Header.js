@@ -1,4 +1,5 @@
 import BaseElement from "../utils/BaseElement.js";
+import i18n from "../../i18n/index.js";
 
 export default class AppHeader extends BaseElement {
   constructor() {
@@ -54,15 +55,15 @@ export default class AppHeader extends BaseElement {
       <div class="header-container">
         <div class="header-item header-rock">
           <img src="assets/img/rock.png">
-          <p>Rock</p>
+          <p>${i18n.rock}</p>
         </div>
         <div class="header-item header-paper">
           <img src="assets/img/paper.png">
-          <p>Paper</p>
+          <p>${i18n.paper}</p>
         </div>
         <div class="header-item header-scissors">
           <img src="assets/img/scissors.png">
-          <p>Scissors</p>
+          <p>${i18n.scissors}</p>
         </div>
       </div>
     </header>

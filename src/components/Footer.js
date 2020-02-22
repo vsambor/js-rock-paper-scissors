@@ -1,4 +1,5 @@
 import BaseElement from "../utils/BaseElement.js";
+import i18n from "../../i18n/index.js";
 
 export default class AppFooter extends BaseElement {
   constructor() {
@@ -21,7 +22,7 @@ export default class AppFooter extends BaseElement {
   createTemplate(style = '') {
     return /*html*/`
     ${style}
-    <footer class="footer">${(new Date()).getFullYear()} © Rock Paper Scissors. All rights reserved.</footer>
+    <footer class="footer">${i18n.footer_rights}</footer>
     `;
   }
 }

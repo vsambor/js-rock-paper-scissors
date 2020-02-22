@@ -1,0 +1,17 @@
+export default {
+  "app_name": "Rock Paper Scissors",
+  "player_vs_computer_title": "PLAYER VS COMPUTER",
+  "computer_vs_computer_title": "COMPUTER VS COMPUTER",
+  "multiplayer_title": "MULTIPLAYER",
+  "rock": "Rock",
+  "paper": "Paper",
+  "scissors": "Scissors",
+  "round_title": "Round",
+  "score_title": "Score",
+  "player1_text": "Player 1",
+  "player2_text": "Player 2",
+  "replay_button": "Replay",
+  "reset_button": "Reset",
+  "start_counter_button": "Click here to start the game...",
+  "footer_rights": `${(new Date()).getFullYear()} © Rock Paper Scissors. All rights reserved.`,
+}

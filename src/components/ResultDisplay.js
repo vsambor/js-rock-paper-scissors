@@ -1,4 +1,5 @@
 import BaseElement from "../utils/BaseElement.js";
+import i18n from "../../i18n/index.js";
 
 export default class ResultDisplay extends BaseElement {
   constructor() {
@@ -76,12 +77,16 @@ export default class ResultDisplay extends BaseElement {
       }
 
       button {
-        width: 200px;
-        height: 40px;
-        margin-bottom: 10px;
-        cursor:pointer;
         background-color: #779cbb;
+        color: black;
+        border: none;
+        padding: 14px 44px;
+        text-align: center;
+        display: inline-block;
         font-size: 18px;
+        margin: 8px 2px;
+        cursor: pointer;
+        width: 200px;
       }
     </style>
     `;
@@ -97,8 +102,8 @@ export default class ResultDisplay extends BaseElement {
         <div id="player2-choice"><img src="${this._getImageChoice(this.player2Choice)}"></div>
       </div>
       <div id="buttons-container">
-        <button id="replay-btn">Replay</button>
-        <button id="reset-btn">Reset</button>
+        <button id="replay-btn">${i18n.replay_button}</button>
+        <button id="reset-btn">${i18n.reset_button}</button>
       </div>
     </div>
     `;

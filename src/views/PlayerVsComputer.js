@@ -1,4 +1,5 @@
 import BaseElement from "../utils/BaseElement.js";
+import i18n from "../../i18n/index.js";
 import StartCounter from "../components/StartCounter.js";
 import HeadsUpDisplay from "../components/HeadsUpDisplay.js";
 import WeaponSelector from "../components/WeaponSelector.js";
@@ -125,7 +126,7 @@ export default class PlayerVsComputer extends BaseElement {
     return /*html*/`
     ${style}
     <div class="player-vs-computer-container">
-      <h4>PLAYER VS COMPUTER</h4>
+      <h4>${i18n.player_vs_computer_title}</h4>
       <heads-up-display id="hud"></heads-up-display>
       <start-counter id="start-counter"></start-counter>
       <result-display id="result-display"></result-display>
