@@ -23,16 +23,4 @@ export default class BaseElement extends HTMLElement {
   createTemplate(style) {
     return ''
   }
-
-  // connectedCallback() {
-  //   console.log('connected!');
-  // }
-
-  // disconnectedCallback() {
-  //   console.log('disconnected!');
-  // }
-
-  // attributeChangedCallback(name, oldVal, newVal) {
-  //   console.log(`Attribute: ${name} changed!`);
-  // }
 }

@@ -13,5 +13,5 @@ export default {
   "replay_button": "Replay",
   "reset_button": "Reset",
   "start_counter_button": "Click here to start the game...",
-  "footer_rights": `${(new Date()).getFullYear()} © Rock Paper Scissors. All rights reserved.`,
+  "footer_rights": '© Rock Paper Scissors. All rights reserved.',
 }

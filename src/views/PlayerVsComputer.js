@@ -8,10 +8,7 @@ import Game from "../models/Game.js";
 import HumanPlayer from "../models/HumanPlayer.js";
 import ComputerPlayer from "../models/ComputerPlayer.js";
 import Rock from "../models/weapons/Rock.js";
-import {
-  PLAYER_1_WON_RESULT,
-  PLAYER_2_WON_RESULT
-} from "../utils/constants.js";
+
 
 const PLAYER_DEFAULT_WEAPON = new Rock();
 
@@ -53,6 +50,7 @@ export default class PlayerVsComputer extends BaseElement {
 
   _onCounterStart() {
     this.weaponSelectorElement.style.display = 'block';
+    this.weaponSelectorElement.enableElement();
     this.hudElement.style.display = 'block';
     this.hudElement.setProperty('player1Text', 'Player');
     this.hudElement.setProperty('player2Text', 'Computer');
@@ -62,6 +60,7 @@ export default class PlayerVsComputer extends BaseElement {
   _onCounterEnd() {
     this.startCounterElement.style.display = 'none';
     this.resultDisplayElement.style.display = 'block';
+    this.weaponSelectorElement.disableElement();
 
     this._startGame();
   }

@@ -1,5 +1,9 @@
 import BaseElement from "../utils/BaseElement.js";
 import i18n from "../../i18n/index.js";
+import {
+  PLAYER_1_WON_RESULT,
+  PLAYER_2_WON_RESULT
+} from "../utils/constants.js";
 
 export default class ResultDisplay extends BaseElement {
   constructor() {
@@ -45,6 +49,29 @@ export default class ResultDisplay extends BaseElement {
     }[choice];
   }
 
+  _getPlayerChoiceElements() {
+    let playerChoiceElements = '';
+
+    if (this.player1Choice && this.player2Choice) {
+      const player1WinnerClass = this.resultText === PLAYER_1_WON_RESULT ? 'winner-choice' : '';
+      const player2WinnerClass = this.resultText === PLAYER_2_WON_RESULT ? 'winner-choice' : '';
+
+      playerChoiceElements = `
+        <div class="${player1WinnerClass}">
+          <img src="${this._getImageChoice(this.player1Choice)}">
+        </div>
+
+        <div id="result-text">${this.resultText}</div>
+
+        <div class="${player2WinnerClass}">
+          <img src="${this._getImageChoice(this.player2Choice)}">
+        </div>
+      `;
+    }
+
+    return playerChoiceElements;
+  }
+
   createStyle() {
     return /*html*/`  
     <style>
@@ -66,8 +93,14 @@ export default class ResultDisplay extends BaseElement {
         display: flex;
         flex-direction: row;
         width: 500px;
+        height: 110px;
         justify-content: space-between;
         align-items: center;
+      }
+
+      .winner-choice img {
+         width: 100px;
+         height: 100px;
       }
 
       #buttons-container {
@@ -97,9 +130,7 @@ export default class ResultDisplay extends BaseElement {
     ${style}
     <div class="result-display-container">
       <div id="choices-result-container">
-        <div id="player1-choice"><img src="${this._getImageChoice(this.player1Choice)}"></div>
-        <div id="result-text">${this.resultText}</div>
-        <div id="player2-choice"><img src="${this._getImageChoice(this.player2Choice)}"></div>
+        ${this._getPlayerChoiceElements()}
       </div>
       <div id="buttons-container">
         <button id="replay-btn">${i18n.replay_button}</button>
@@ -107,10 +138,6 @@ export default class ResultDisplay extends BaseElement {
       </div>
     </div>
     `;
-  }
-
-  connectedCallback() {
-    this._initEventListeners();
   }
 
   disconnectedCallback() {

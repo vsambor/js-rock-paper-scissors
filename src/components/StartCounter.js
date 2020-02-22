@@ -29,11 +29,11 @@ export default class StartCounter extends BaseElement {
     this._onStartCounting();
 
     const timer = setInterval(() => {
-      if (this.maxCountSeconds === 0) {
+      if (this.maxCountSeconds === 1) {
         clearInterval(timer);
         this._onFinishCounting();
       } else {
-        this.numberHolder.innerHTML = this.maxCountSeconds--;
+        this.numberHolder.innerHTML = --this.maxCountSeconds;
       }
     }, 1000);
   }

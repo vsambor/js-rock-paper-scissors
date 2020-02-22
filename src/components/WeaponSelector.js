@@ -48,6 +48,14 @@ export default class WeaponSelector extends BaseElement {
     this.dispatchEvent(weaponSelectedEvent);
   }
 
+  enableElement() {
+    this.root.querySelector('.weapon-selector-container').classList.remove('element-disabled');
+  }
+
+  disableElement() {
+    this.root.querySelector('.weapon-selector-container').classList.add('element-disabled');
+  }
+
   createStyle() {
     return /*html*/`
     <style>
@@ -88,6 +96,10 @@ export default class WeaponSelector extends BaseElement {
       .weapon-item img {
         width: 50px;
         height: 50px;
+      }
+
+      .element-disabled {
+        pointer-events: none;
       }
     </style>
     `;

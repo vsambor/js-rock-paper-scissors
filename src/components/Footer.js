@@ -22,7 +22,7 @@ export default class AppFooter extends BaseElement {
   createTemplate(style = '') {
     return /*html*/`
     ${style}
-    <footer class="footer">${i18n.footer_rights}</footer>
+    <footer class="footer">${(new Date()).getFullYear()}${i18n.footer_rights}</footer>
     `;
   }
 }
