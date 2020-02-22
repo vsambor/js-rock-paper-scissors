@@ -1,6 +1,7 @@
 # js-rock-paper-scissors
-Rock paper scissors game written in pure JavaScript
+Rock Paper Scissors game written in pure JavaScript
 
+Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 
 ## Status
 ![](https://img.shields.io/github/workflow/status/vsambor/js-rock-paper-scissors/FRONT-CI?style=for-the-badge&label=FRONT-CI&logo=github)
@@ -35,4 +36,13 @@ Rock paper scissors game written in pure JavaScript
 **Testing:**
 
 `npm run test`
+
+
+### Result
+
+**Menu**
+<img width="1407" alt="Screen Shot 2020-02-22 at 3 13 55 PM" src="https://user-images.githubusercontent.com/26199384/75093905-6a8fa980-5586-11ea-9448-2e53b94aab56.png">
+
+**Player vs Computer**
+<img width="1424" alt="Screen Shot 2020-02-22 at 3 15 05 PM" src="https://user-images.githubusercontent.com/26199384/75093909-7a0ef280-5586-11ea-86d7-aa31628238dd.png">
 
