@@ -27,6 +27,13 @@ Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 - [lite-server](https://www.npmjs.com/package/lite-server)
 - [jest](https://karma-runner.github.io/2.0/index.html)
 
+### Working Environment
+-  Visual Studio Code
+
+    - Extension [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html )
+    Used for syntax highlighting in es6 multiline strings
+
+
 ### Usage
 
 **Run lite server:**
