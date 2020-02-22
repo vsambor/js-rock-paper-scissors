@@ -99,13 +99,13 @@ export default class WeaponSelector extends BaseElement {
     <div class="weapon-selector-container">
       <div class="weapons-container">
         <div class="weapon-item weapon-rock active">
-          <img src="images/rock.png">
+          <img src="assets/img/rock.png">
         </div>
         <div class="weapon-item weapon-paper">
-          <img src="images/paper.png">
+          <img src="assets/img/paper.png">
         </div>
         <div class="weapon-item weapon-scissors">
-          <img src="images/scissors.png">
+          <img src="assets/img/scissors.png">
         </div>
       </div>
     </div>

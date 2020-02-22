@@ -38,9 +38,9 @@ export default class ResultDisplay extends BaseElement {
 
   _getImageChoice(choice) {
     return {
-      'rock': 'images/rock.png',
-      'paper': 'images/paper.png',
-      'scissors': 'images/scissors.png'
+      'rock': 'assets/img/rock.png',
+      'paper': 'assets/img/paper.png',
+      'scissors': 'assets/img/scissors.png'
     }[choice];
   }
 

@@ -53,15 +53,15 @@ export default class AppHeader extends BaseElement {
     <header class="header">
       <div class="header-container">
         <div class="header-item header-rock">
-          <img src="images/rock.png">
+          <img src="assets/img/rock.png">
           <p>Rock</p>
         </div>
         <div class="header-item header-paper">
-          <img src="images/paper.png">
+          <img src="assets/img/paper.png">
           <p>Paper</p>
         </div>
         <div class="header-item header-scissors">
-          <img src="images/scissors.png">
+          <img src="assets/img/scissors.png">
           <p>Scissors</p>
         </div>
       </div>
