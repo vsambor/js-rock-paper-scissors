@@ -36,6 +36,7 @@ export default class PlayerVsComputer extends BaseElement {
   _initElements() {
     this.hudElement = this.root.getElementById('hud');
     this.startCounterElement = this.root.getElementById('start-counter');
+    this.startCounterElement.setProperty('startButtonText', i18n.player_start_counter_button_text);
     this.weaponSelectorElement = this.root.getElementById('weapon-selector');
     this.resultDisplayElement = this.root.getElementById('result-display');
   }

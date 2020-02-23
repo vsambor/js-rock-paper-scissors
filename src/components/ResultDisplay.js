@@ -1,9 +1,8 @@
 import BaseElement from "../utils/BaseElement.js";
 import i18n from "../../i18n/index.js";
-import {
-  PLAYER_1_WON_RESULT,
-  PLAYER_2_WON_RESULT
-} from "../utils/constants.js";
+import { PLAYER_1_WON_RESULT, PLAYER_2_WON_RESULT, DRAW_RESULT } from "../utils/constants.js";
+import { WIN_SOUNDS_LIST, LOSE_SOUNDS_LIST, DRAW_SOUNDS_LIST } from "../utils/constants.js";
+import { getRandomItemFromArray } from "../utils/random.js";
 
 export default class ResultDisplay extends BaseElement {
   constructor() {
@@ -30,14 +29,18 @@ export default class ResultDisplay extends BaseElement {
 
   _initEventListeners() {
     this.replayButtonElement.addEventListener('click', this._onReplayClick.bind(this));
+    this.replayButtonElement.addEventListener('mouseover', this.playHoverSound.bind(this));
     this.resetButtonElement.addEventListener('click', this._onResetClick.bind(this));
+    this.resetButtonElement.addEventListener('mouseover', this.playHoverSound.bind(this));
   }
 
   _onReplayClick() {
+    this.playClickSound();
     this.triggerEvent('replay');
   }
 
   _onResetClick() {
+    this.playClickSound();
     this.triggerEvent('reset');
   }
 
@@ -55,6 +58,10 @@ export default class ResultDisplay extends BaseElement {
 
       if (this.resultText === PLAYER_1_WON_RESULT) {
         this.player1ChoiceElement.classList.add('winner-choice');
+
+        if (window.location.hash === "#player-vs-computer") {
+          this.soundManager.playSoundOnce(getRandomItemFromArray(WIN_SOUNDS_LIST));
+        }
       }
     }
 
@@ -63,6 +70,10 @@ export default class ResultDisplay extends BaseElement {
 
       if (this.resultText === PLAYER_2_WON_RESULT) {
         this.player2ChoiceElement.classList.add('winner-choice');
+
+        if (window.location.hash === "#player-vs-computer") {
+          this.soundManager.playSoundOnce(getRandomItemFromArray(LOSE_SOUNDS_LIST));
+        }
       }
     }
 
@@ -70,6 +81,10 @@ export default class ResultDisplay extends BaseElement {
       this.player1ChoiceElement.classList.remove('winner-choice');
       this.player2ChoiceElement.classList.remove('winner-choice');
       this.resultTextElement.innerHTML = this.resultText;
+
+      if (this.resultText === DRAW_RESULT && window.location.hash === "#player-vs-computer") {
+        this.soundManager.playSoundOnce(getRandomItemFromArray(DRAW_SOUNDS_LIST));
+      }
     }
   }
 
@@ -131,6 +146,12 @@ export default class ResultDisplay extends BaseElement {
         cursor: pointer;
         width: 200px;
       }
+
+      button:hover {
+        color: #ffffff;
+        background: #1d3a54;
+        transition: all 0.3s ease 0s;
+      }
     </style>
     `;
   }
@@ -153,12 +174,18 @@ export default class ResultDisplay extends BaseElement {
   }
 
   disconnectedCallback() {
+    this._removeEventListeners();
+  }
+
+  _removeEventListeners() {
     if (this.replayButton) {
-      this.replayButton.removeEventListener('click', this._onReplayClick.bind(this));
+      this.replayButtonElement.removeEventListener('click', this._onReplayClick.bind(this));
+      this.replayButtonElement.removeEventListener('mouseover', this.playHoverSound.bind(this));
     }
 
     if (this.resetButton) {
-      this.resetButton.removeEventListener('click', this._onResetClick.bind(this));
+      this.resetButtonElement.removeEventListener('click', this._onResetClick.bind(this));
+      this.resetButtonElement.removeEventListener('mouseover', this.playHoverSound.bind(this));
     }
   }
 }

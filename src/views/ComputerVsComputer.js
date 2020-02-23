@@ -28,6 +28,7 @@ export default class ComputerVsComputer extends BaseElement {
   _initElements() {
     this.hudElement = this.root.getElementById('hud');
     this.startCounterElement = this.root.getElementById('start-counter');
+    this.startCounterElement.setProperty('startButtonText', i18n.computer_start_counter_button_text);
     this.resultDisplayElement = this.root.getElementById('result-display');
   }
 

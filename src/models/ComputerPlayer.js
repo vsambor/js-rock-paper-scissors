@@ -1,4 +1,5 @@
 import Player from "../models/Player.js";
+import { getRandomItemFromArray } from "../utils/random.js";
 
 export default class ComputerPlayer extends Player {
   constructor() {
@@ -6,9 +7,8 @@ export default class ComputerPlayer extends Player {
   }
 
   choose(weapons) {
-    // Maybe I should use: https://bost.ocks.org/mike/shuffle/ ??
-    const randomIndex = Math.floor(Math.random() * (weapons.length));
-    this.choice = weapons[randomIndex];
+    // Not sure if I should use: https://bost.ocks.org/mike/shuffle/ ??
+    this.choice = getRandomItemFromArray(weapons);
 
     return this.choice;
   }

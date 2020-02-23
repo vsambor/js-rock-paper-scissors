@@ -1,3 +1,6 @@
+import SoundManager from "../utils/SoundManager.js";
+import { SOUND_PATH_LIST } from "../utils/constants.js";
+
 export default class BaseElement extends HTMLElement {
   constructor() {
     super();
@@ -5,6 +8,8 @@ export default class BaseElement extends HTMLElement {
     this.root = this.attachShadow({ mode: 'open' });
     this.elStyle = this.createStyle();
     this.render();
+
+    this.soundManager = new SoundManager();
   }
 
   setProperty(name, value) {
@@ -21,6 +26,14 @@ export default class BaseElement extends HTMLElement {
       detail: detail
     });
     this.dispatchEvent(event);
+  }
+
+  playClickSound() {
+    this.soundManager.playSoundOnce(SOUND_PATH_LIST.click, 0.3);
+  }
+
+  playHoverSound() {
+    this.soundManager.playSoundOnce(SOUND_PATH_LIST.hover);
   }
 
   render() {

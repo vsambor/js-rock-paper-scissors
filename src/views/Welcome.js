@@ -1,6 +1,6 @@
 import BaseElement from "../utils/BaseElement.js";
 import i18n from "../../i18n/index.js";
-import { SOUNDS_PATH_LIST } from "../utils/constants.js";
+import { SOUND_PATH_LIST } from "../utils/constants.js";
 
 export default class Welcome extends BaseElement {
   constructor() {
@@ -15,15 +15,16 @@ export default class Welcome extends BaseElement {
   }
 
   _initEventListeners() {
-    if (this.continueButton) {
-      this.continueButton.addEventListener('click', this._onContinueButtonClick.bind(this));
-      this.continueButton.addEventListener('mouseover', this.onButtonHover.bind(this));
-    }
+    this.continueButton.addEventListener('click', this._onContinueButtonClick.bind(this));
+    this.continueButton.addEventListener('mouseover', this.playHoverSound.bind(this));
   }
 
   _onContinueButtonClick() {
-    this.soundManager.playSoundOnce(SOUNDS_PATH_LIST.click);
-    this.soundManager.playSound(SOUNDS_PATH_LIST.background, 0.3, true);
+    this.playClickSound();
+
+    if (!this.soundManager.isPlaying()) {
+      this.soundManager.playSound(SOUND_PATH_LIST.background, 0.3, true);
+    }
   }
 
   createStyle() {
@@ -90,7 +91,7 @@ export default class Welcome extends BaseElement {
   _removeEventListeners() {
     if (this.continueButton) {
       this.continueButton.removeEventListener('click', this._onContinueButtonClick.bind(this));
-      this.continueButton.removeEventListener('mouseover', this.onButtonHover.bind(this));
+      this.continueButton.removeEventListener('mouseover', this.playHoverSound.bind(this));
     }
   }
 }

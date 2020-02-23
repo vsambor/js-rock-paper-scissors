@@ -3,6 +3,11 @@ import BaseElement from "../utils/BaseElement.js";
 export default class Menu extends BaseElement {
   constructor() {
     super();
+
+    const menuButtons = this.root.querySelectorAll('.button');
+
+    menuButtons.forEach(button => button.addEventListener('click', this.playClickSound.bind(this)));
+    menuButtons.forEach(button => button.addEventListener('mouseover', this.playHoverSound.bind(this)));
   }
 
   createStyle() {
@@ -26,7 +31,7 @@ export default class Menu extends BaseElement {
       }
 
       .button {
-        background-color: rgb(85, 155, 216);
+        background-color: #559bd8;
         color: black;
         border: none;
         padding: 14px 44px;
@@ -37,6 +42,12 @@ export default class Menu extends BaseElement {
         cursor: pointer;
         text-decoration: none;
         width: 300px;
+      }
+
+      .button:hover {
+        color: #ffffff;
+        background: #1d3a54;
+        transition: all 0.3s ease 0s;
       }
     </style>
     `;

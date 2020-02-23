@@ -13,6 +13,7 @@ export default {
   "player2_text": "Player 2",
   "replay_button": "Replay",
   "reset_button": "Reset",
-  "start_counter_button": "Click here to start the game...",
+  "player_start_counter_button_text": "Click here to start the game.<br>You will have 3 seconds to change your mind while choosing the best weapon",
+  "computer_start_counter_button_text": "Click here to start the fight between computers",
   "footer_rights": '© Rock Paper Scissors. All rights reserved.',
 }

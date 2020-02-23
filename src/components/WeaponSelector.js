@@ -2,6 +2,7 @@ import BaseElement from "../utils/BaseElement.js";
 import Rock from "../models/weapons/Rock.js";
 import Paper from "../models/weapons/Paper.js";
 import Scissors from "../models/weapons/Scissors.js";
+import { SOUND_PATH_LIST } from "../utils/constants.js";
 
 
 const WEAPONS_MAP = {
@@ -16,20 +17,20 @@ export default class WeaponSelector extends BaseElement {
     super();
 
     this._initElements();
-    this._listenToWeaponChange();
+    this._initEventListeners();
   }
 
   _initElements() {
     this._weaponSelectorContainer = this.root.querySelector('.weapon-selector-container');
+    this._weaponsElements = this.root.querySelectorAll('.weapon-item');
   }
 
-  _listenToWeaponChange() {
-    const weapons = this.root.querySelectorAll('.weapon-item');
-
-    weapons.forEach(element => element.addEventListener('click', this._handleWeaponChange.bind(this)));
+  _initEventListeners() {
+    this._weaponsElements.forEach(weapon => weapon.addEventListener('click', this._handleWeaponChange.bind(this)));
   }
 
   _handleWeaponChange(event) {
+    this.soundManager.playSoundOnce(SOUND_PATH_LIST.switch);
     this._updateActiveClass(event.currentTarget);
     this.triggerEvent('weapon-selected', { weapon: this._getWeaponFromTarget(event.currentTarget) });
   }
@@ -87,8 +88,15 @@ export default class WeaponSelector extends BaseElement {
         height: 65px;
       }
 
+      .weapon-item:hover {
+        color: #ffffff;
+        background: #774141;
+        border-radius: 20px;
+      }
+
       .weapon-item.active {
         background-color: #ff7b7b;
+        border-radius: 20px;
       }
       
       .weapon-item img {
@@ -120,6 +128,18 @@ export default class WeaponSelector extends BaseElement {
       </div>
     </div>
     `;
+  }
+
+  disconnectedCallback() {
+    this._removeEventListeners();
+  }
+
+  _removeEventListeners() {
+    if (this._weaponsElements) {
+      this._weaponsElements.forEach(weapon => {
+        weapon.removeEventListener('click', this._handleWeaponChange.bind(this));
+      });
+    }
   }
 }
 

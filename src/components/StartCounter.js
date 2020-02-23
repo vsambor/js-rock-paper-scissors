@@ -7,22 +7,25 @@ export default class StartCounter extends BaseElement {
     super();
 
     this.maxCountSeconds = MAX_COUNTER_SECONDS;
+    this.startButtonText = '';
 
     this._initElements();
     this._initEventListeners();
   }
 
   _initElements() {
-    this.buttonStart = this.root.getElementById('start-counter-button');
+    this.startButton = this.root.getElementById('start-counter-button');
     this.numberHolder = this.root.getElementById('start-counter-number');
   }
 
   _initEventListeners() {
-    this.buttonStart.addEventListener('click', this._startCounting.bind(this));
+    this.startButton.addEventListener('click', this._startCounting.bind(this));
+    this.startButton.addEventListener('mouseover', this.playHoverSound.bind(this));
   }
 
   _startCounting() {
-    this.buttonStart.style.display = 'none';
+    this.playClickSound();
+    this.startButton.style.display = 'none';
     this.numberHolder.style.display = 'block';
     this.numberHolder.innerHTML = this.maxCountSeconds;
 
@@ -49,7 +52,13 @@ export default class StartCounter extends BaseElement {
   reset() {
     this.maxCountSeconds = MAX_COUNTER_SECONDS;
     this.numberHolder.style.display = 'none';
-    this.buttonStart.style.display = 'block';
+    this.startButton.style.display = 'block';
+  }
+
+  onPropertyUpdated(name) {
+    if (name === 'startButtonText') {
+      this.startButton.innerHTML = this.startButtonText;
+    }
   }
 
   createStyle() {
@@ -81,9 +90,20 @@ export default class StartCounter extends BaseElement {
     ${style}
     <div class="start-counter-container">
       <div id="start-counter-number"></div>
-      <div id="start-counter-button">${i18n.start_counter_button}</div>
+      <div id="start-counter-button"></div>
     </div>
     `;
+  }
+
+  disconnectedCallback() {
+    this._removeEventListeners();
+  }
+
+  _removeEventListeners() {
+    if (this.startButton) {
+      this.startButton.addEventListener('click', this._startCounting.bind(this));
+      this.startButton.addEventListener('mouseover', this.playHoverSound.bind(this));
+    }
   }
 }
 

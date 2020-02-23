@@ -4,6 +4,35 @@ import i18n from "../../i18n/index.js";
 export default class AppHeader extends BaseElement {
   constructor() {
     super();
+
+    this._initElements();
+    this._initEventListeners();
+  }
+
+  _initElements() {
+    this.soundButton = this.root.querySelector('.sound-button');
+    this.soundButtonImage = this.root.querySelector('.sound-button img');
+  }
+
+  _initEventListeners() {
+    this.soundButton.addEventListener('click', this._onSoundButtonClick.bind(this));
+    this.soundButton.addEventListener('mouseover', this.playHoverSound.bind(this));
+  }
+
+  _onSoundButtonClick() {
+    this.playClickSound();
+    this._toggleSoundImage();
+  }
+
+  _toggleSoundImage() {
+    if (this.soundButtonImage.src.includes('sound_on')) {
+      this.soundButtonImage.src = '../../assets/img/sound_off.png';
+      this.soundManager.stopAllSounds();
+    }
+    else {
+      this.soundButtonImage.src = '../../assets/img/sound_on.png';
+      this.soundManager.startAllSounds();
+    }
   }
 
   createStyle() {
@@ -25,6 +54,7 @@ export default class AppHeader extends BaseElement {
         justify-content: center;
         padding-top: 15px;
         padding-bottom: 15px;
+        position: relative;
       }
       
       .header-item {
@@ -43,6 +73,18 @@ export default class AppHeader extends BaseElement {
       .header-item img {
         width: 50px;
         height: 50px;
+      }
+
+      .sound-button {
+        position: absolute;
+        right: 20px;
+        top: 37px;
+        cursor: pointer;
+      }
+
+      .sound-button img {
+        width: 33px;
+        height: 33px;
       }
     </style>
     `;
@@ -65,9 +107,23 @@ export default class AppHeader extends BaseElement {
           <img src="assets/img/scissors.png">
           <p>${i18n.scissors}</p>
         </div>
+        <div class="sound-button">
+          <img src="../../assets/img/sound_on.png">
+        </div>
       </div>
     </header>
     `;
+  }
+
+  disconnectedCallback() {
+    this._removeEventListeners();
+  }
+
+  _removeEventListeners() {
+    if (this.soundButton) {
+      this.soundButton.addEventListener('click', this._onSoundButtonClick.bind(this));
+      this.soundButton.addEventListener('mouseover', this.playHoverSound.bind(this));
+    }
   }
 }
 
