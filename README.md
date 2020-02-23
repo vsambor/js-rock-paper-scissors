@@ -47,6 +47,9 @@ Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 
 ### Result
 
+**Welcome**
+<img width="1414" alt="Screen Shot 2020-02-23 at 6 35 30 PM" src="https://user-images.githubusercontent.com/26199384/75117722-52965380-5674-11ea-9b29-86f279918871.png">
+
 **Menu**
 <img width="1407" alt="Screen Shot 2020-02-22 at 3 13 55 PM" src="https://user-images.githubusercontent.com/26199384/75093905-6a8fa980-5586-11ea-9448-2e53b94aab56.png">
 
