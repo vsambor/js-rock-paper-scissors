@@ -1,5 +1,4 @@
 import BaseElement from "../utils/BaseElement.js";
-import i18n from "../../i18n/index.js";
 
 const MAX_COUNTER_SECONDS = 3;
 export default class StartCounter extends BaseElement {

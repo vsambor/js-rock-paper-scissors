@@ -1,3 +1,14 @@
+/**
+ * Keeps all common web components functionality.
+ * 
+ * Main roles:
+ *  - creates the shadow DOM
+ *  - provides a complete component render by creating style and template
+ *  - allows property set for inherited classes
+ *  - provides a method to easyly trigger custom events
+ *  - holds the sound manager singleton.
+ ***/
+
 import SoundManager from "../utils/SoundManager.js";
 import { SOUND_PATH_LIST } from "../utils/constants.js";
 

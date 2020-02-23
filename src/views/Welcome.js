@@ -30,6 +30,8 @@ export default class Welcome extends BaseElement {
   createStyle() {
     return /*html*/`  
     <style>
+    @import "../../public/css/global.css";
+
     .welcome-container {
       display: flex;
       flex-direction: column;
@@ -49,26 +51,6 @@ export default class Welcome extends BaseElement {
       width: 430px;
       height: auto;
     }
-
-    .button {
-        background-color: #559bd8;
-        color: black;
-        border: none;
-        padding: 14px 44px;
-        text-align: center;
-        display: inline-block;
-        font-size: 20px;
-        margin: 15px 2px;
-        cursor: pointer;
-        text-decoration: none;
-        width: 300px;
-      }
-
-      .button:hover {
-        color: #ffffff;
-        background: #1d3a54;
-        transition: all 0.3s ease 0s;
-      }
     </style>
     `;
   }
