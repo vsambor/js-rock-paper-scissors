@@ -36,6 +36,10 @@ Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 
 ### Usage
 
+**Install Dependencies**
+
+`npm install`
+
 **Run lite server:**
 
 `npm run dev`
