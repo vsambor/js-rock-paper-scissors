@@ -8,18 +8,18 @@ Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 
 ![](https://img.shields.io/github/workflow/status/vsambor/js-rock-paper-scissors/SECURITY-CHECK?style=for-the-badge&label=Security&logo=npm)
 
-### Features
+## Features
 - Play vs Computer
 - Play Computer vs Computer
-- Assures the unicity of random computer choices
 - Possibility to play multiple rounds in a row
 - Has a count down on each round
 - Has a heads up display which indicates round and players score
+- Playes background sounds and some sound effects
 
-### Dashboard
+## Dashboard
 [Kanban](https://github.com/vsambor/js-rock-paper-scissors/projects/1)
 
-### Technology stack
+## Technology stack
 - [HTML](https://en.wikipedia.org/wiki/HTML)
 - [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
@@ -27,14 +27,14 @@ Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 - [lite-server](https://www.npmjs.com/package/lite-server)
 - [jest](https://karma-runner.github.io/2.0/index.html)
 
-### Working Environment
+## Working Environment
 -  Visual Studio Code
 
     - Extension [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html )
     Used for syntax highlighting in es6 multiline strings
 
 
-### Usage
+## Usage
 
 **Install Dependencies**
 
@@ -49,7 +49,7 @@ Don't know the game? http://en.wikipedia.org/wiki/Rock-paper-scissors
 `npm run test`
 
 
-### Result
+## Result
 
 **Welcome**
 <img width="1414" alt="Screen Shot 2020-02-23 at 6 35 30 PM" src="https://user-images.githubusercontent.com/26199384/75117722-52965380-5674-11ea-9b29-86f279918871.png">
