@@ -9,8 +9,10 @@ export default class BaseElement extends HTMLElement {
 
   setProperty(name, value) {
     this[name] = value;
-    this.render();
+    this.onPropertyUpdated(name, value);
   }
+
+  onPropertyUpdated() { }
 
   triggerEvent(name, detail) {
     const event = new CustomEvent(name, {

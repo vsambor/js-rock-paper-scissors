@@ -15,20 +15,22 @@ export default class ResultDisplay extends BaseElement {
   }
 
   _initProperties() {
-    this.resultText = '';
+    this.resultTextElement = '';
     this.player1Choice = null;
     this.player2Choice = null;
   }
 
   _initElements() {
-    this.replayButton = this.root.getElementById('replay-button');
-    this.resetButton = this.root.getElementById('reset-button');
-    this.resultText = this.root.getElementById('result-text');
+    this.replayButtonElement = this.root.getElementById('replay-button');
+    this.resetButtonElement = this.root.getElementById('reset-button');
+    this.resultTextElement = this.root.getElementById('result-text');
+    this.player1ChoiceElement = this.root.getElementById('player1-choice');
+    this.player2ChoiceElement = this.root.getElementById('player2-choice');
   }
 
   _initEventListeners() {
-    this.replayButton.addEventListener('click', this._onReplayClick.bind(this));
-    this.resetButton.addEventListener('click', this._onResetClick.bind(this));
+    this.replayButtonElement.addEventListener('click', this._onReplayClick.bind(this));
+    this.resetButtonElement.addEventListener('click', this._onResetClick.bind(this));
   }
 
   _onReplayClick() {
@@ -47,27 +49,37 @@ export default class ResultDisplay extends BaseElement {
     }[choice];
   }
 
-  _getPlayerChoiceElements() {
-    let playerChoiceElements = '';
+  onPropertyUpdated(name) {
+    if (name === 'player1Choice') {
+      this._createAndAppendImageChoice(this.player1ChoiceElement, this.player1Choice);
 
-    if (this.player1Choice && this.player2Choice) {
-      const player1WinnerClass = this.resultText === PLAYER_1_WON_RESULT ? 'winner-choice' : '';
-      const player2WinnerClass = this.resultText === PLAYER_2_WON_RESULT ? 'winner-choice' : '';
-
-      playerChoiceElements = `
-        <div class="${player1WinnerClass}">
-          <img src="${this._getImageChoice(this.player1Choice)}">
-        </div>
-
-        <div id="result-text">${this.resultText}</div>
-
-        <div class="${player2WinnerClass}">
-          <img src="${this._getImageChoice(this.player2Choice)}">
-        </div>
-      `;
+      if (this.resultText === PLAYER_1_WON_RESULT) {
+        this.player1ChoiceElement.classList.add('winner-choice');
+      }
     }
 
-    return playerChoiceElements;
+    if (name === 'player2Choice') {
+      this._createAndAppendImageChoice(this.player2ChoiceElement, this.player2Choice);
+
+      if (this.resultText === PLAYER_2_WON_RESULT) {
+        this.player2ChoiceElement.classList.add('winner-choice');
+      }
+    }
+
+    if (name === 'resultText') {
+      this.player1ChoiceElement.classList.remove('winner-choice');
+      this.player2ChoiceElement.classList.remove('winner-choice');
+      this.resultTextElement.innerHTML = this.resultText;
+    }
+  }
+
+  _createAndAppendImageChoice(appendTarget, choice) {
+    if (choice) {
+      const img = document.createElement('img');
+      img.src = this._getImageChoice(choice);
+      appendTarget.innerHTML = '';
+      appendTarget.append(img);
+    }
   }
 
   createStyle() {
@@ -128,7 +140,9 @@ export default class ResultDisplay extends BaseElement {
     ${style}
     <div class="result-display-container">
       <div id="choices-result-container">
-        ${this._getPlayerChoiceElements()}
+        <div id="player1-choice"></div>
+        <div id="result-text"></div>
+        <div id="player2-choice"></div>
       </div>
       <div id="buttons-container">
         <button id="replay-button">${i18n.replay_button}</button>
@@ -139,8 +153,13 @@ export default class ResultDisplay extends BaseElement {
   }
 
   disconnectedCallback() {
-    this.replayButton.removeEventListener('click', this._onReplayClick.bind(this));
-    this.resetButton.removeEventListener('click', this._onResetClick.bind(this));
+    if (this.replayButton) {
+      this.replayButton.removeEventListener('click', this._onReplayClick.bind(this));
+    }
+
+    if (this.resetButton) {
+      this.resetButton.removeEventListener('click', this._onResetClick.bind(this));
+    }
   }
 }
 

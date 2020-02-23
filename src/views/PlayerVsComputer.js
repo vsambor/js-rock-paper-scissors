@@ -80,7 +80,6 @@ export default class PlayerVsComputer extends BaseElement {
   }
 
   _onReplay(event) {
-    console.log('replay clicked!');
     this.startCounterElement.reset();
     this.resultDisplayElement.style.display = 'none';
     this.weaponSelectorElement.style.display = 'none';
@@ -88,7 +87,6 @@ export default class PlayerVsComputer extends BaseElement {
   }
 
   _onReset(event) {
-    console.log('reset clicked!');
     this.startCounterElement.reset();
     this.hudElement.reset();
     this.game.reset();

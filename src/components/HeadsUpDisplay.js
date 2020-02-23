@@ -13,6 +13,10 @@ export default class HeadsUpDisplay extends BaseElement {
     this.render();
   }
 
+  onPropertyUpdated(name) {
+    this.render();
+  }
+
   reset() {
     this.player1Score = 0;
     this.player2Score = 0;

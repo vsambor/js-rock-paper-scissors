@@ -63,20 +63,16 @@ export default class ComputerVsComputer extends BaseElement {
   }
 
   _onReplay(event) {
-    console.log('replay clicked!');
     this.startCounterElement.reset();
     this.resultDisplayElement.style.display = 'none';
-    this.weaponSelectorElement.style.display = 'none';
     this.startCounterElement.style.display = 'block';
   }
 
   _onReset(event) {
-    console.log('reset clicked!');
     this.startCounterElement.reset();
     this.hudElement.reset();
     this.game.reset();
     this.resultDisplayElement.style.display = 'none';
-    this.weaponSelectorElement.style.display = 'none';
     this.startCounterElement.style.display = 'block';
   }
 
@@ -120,7 +116,6 @@ export default class ComputerVsComputer extends BaseElement {
   disconnectedCallback() {
     this.startCounterElement.removeEventListener('counter-start', this._onCounterStart.bind(this));
     this.startCounterElement.removeEventListener('counter-end', this._onCounterEnd.bind(this));
-    this.weaponSelectorElement.removeEventListener('weapon-selected', this._onWeaponSelected.bind(this));
     this.resultDisplayElement.removeEventListener('replay', this._onReplay.bind(this));
     this.resultDisplayElement.removeEventListener('reset', this._onReset.bind(this));
   }
