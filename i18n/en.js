@@ -1,5 +1,6 @@
 export default {
   "app_name": "Rock Paper Scissors",
+  "welcome_title": "WELCOME",
   "player_vs_computer_title": "PLAYER VS COMPUTER",
   "computer_vs_computer_title": "COMPUTER VS COMPUTER",
   "multiplayer_title": "MULTIPLAYER",
