@@ -1,5 +1,5 @@
 /**
- * Holdes common constants.
+ * Holds common constants.
  ***/
 
 export const PLAYER_1_WON_RESULT = 'Player 1 won';

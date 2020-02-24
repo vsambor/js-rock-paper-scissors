@@ -1,6 +1,6 @@
 /**
  * A singleton class that manages all game sounds.
- * It also provides an easy interface for hadling basic audio functionalities.
+ * It also provides an easy interface for handling basic audio functionalities.
  * 
  * Main roles:
  *  - can play sounds by path with some additional options like: volume, looping

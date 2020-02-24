@@ -2,9 +2,9 @@
  * Creates a single page application system.
  * 
  * Main roles:
- *  - accepts and holdes a list of routes i.e. {path, view}
+ *  - accepts and holds a list of routes i.e. {path, view}
  *  - listens to address hash change
- *  - renders a view which correspond to the current hash
+ *  - renders a view which corresponds to the current hash
  ***/
 
 const ROUTER_VIEW_ID = 'router-view';

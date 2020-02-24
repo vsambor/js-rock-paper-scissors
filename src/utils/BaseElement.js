@@ -3,9 +3,9 @@
  * 
  * Main roles:
  *  - creates the shadow DOM
- *  - provides a complete component render by creating style and template
+ *  - provides a complete component rendering by creating style and template
  *  - allows property set for inherited classes
- *  - provides a method to easyly trigger custom events
+ *  - provides a method to easily trigger custom events
  *  - holds the sound manager singleton.
  ***/
 

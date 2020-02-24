@@ -1,5 +1,5 @@
 /**
- * Holdes functions related to random scenarios.
+ * Holds functions related to random scenarios.
  ***/
 
 export function getRandomItemFromArray(array) {
